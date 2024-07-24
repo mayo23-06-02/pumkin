@@ -8,33 +8,32 @@ import WithSomeIntrest from "@/components/WithSameIntrest/WithSomeIntrest";
 import YouMayKnowHome from "@/components/YouMayKnow/YouMayKnowHome";
 import Head from "next/head";
 import Image from "next/image";
+import Script from 'next/script'; // Import the Script component
 import { BiCopyright } from 'react-icons/bi'
 
 export default function Discover() {
   return (
     <div>
-            <Head>
-                <title>Discover - Pumpkin</title>
-                <link rel="icon" href="/favicon.ico" />
-                <meta charSet="utf-8" />
-                <script
-                    src="https://widget.Cloudinary.com/v2.0/global/all.js"
-                    type="text/javascript"
-                ></script>
-            </Head>
-            <main className=" flex  h-screen w-screen overflow-auto
-    bg-gradient-to-l justify-center from-[#EFEFEF]   to-[#EFEFEF]
-     z-[-1]">
-                <div className="items-center flex flex-col">
-                    <span className='flex z-50 w-screen'>
-                        <MainHeader />
-                    </span>
-                    <div className='max-w-[1280px] w-full '>
-                      <SearchBar />
-                      <YouMayKnowHome />
-                    </div>
-                </div>
-            </main>
+      <Head>
+        <title>Discover - Pumpkin</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta charSet="utf-8" />
+      </Head>
+      <Script
+        src="https://widget.Cloudinary.com/v2.0/global/all.js"
+        strategy="lazyOnload" // Load the script lazily
+      />
+      <main className="flex h-screen w-screen overflow-auto bg-gradient-to-l justify-center from-[#EFEFEF] to-[#EFEFEF] z-[-1]">
+        <div className="items-center flex flex-col">
+          <span className='flex z-50 w-screen'>
+            <MainHeader />
+          </span>
+          <div className='max-w-[1280px] w-full '>
+            <SearchBar />
+            <YouMayKnowHome />
+          </div>
         </div>
+      </main>
+    </div>
   );
 }

@@ -36,7 +36,7 @@ function ProfileCard({ id ,username, name, image, surname = '', hickies, pumpkin
         <div className=' relative px-4 items-center space-y-12 flex-col flex '>
             <Image src={image} width={200} height={200} className='rounded-full' />
             <span className='  bottom-0    rounded-b-[12px] px-2 lg:px-6'>
-                <div  className='text-white lg:space-y-2 -space-y-1 flex flex-col items-center '>
+                <div  className='text-black lg:space-y-2 -space-y-1 flex flex-col items-center '>
                     <div className='flex font-bold  text-2xl lg:text-3xl space-x-3'>
                         <div className='space-x-1 flex'>
                             <p>{name}</p>
