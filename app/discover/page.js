@@ -1,15 +1,7 @@
 import SearchBar from "@/components/Discover/SearchBar";
-import Slider from "@/components/Feed/Slider";
-import LoginHome from "@/components/Login Page/LoginHome";
-import DiscoverBanner from "@/components/UI/Banners/Discover";
-import Header from "@/components/UI/Header/Header";
 import MainHeader from "@/components/UI/Header/MainHeader";
-import WithSomeIntrest from "@/components/WithSameIntrest/WithSomeIntrest";
 import YouMayKnowHome from "@/components/YouMayKnow/YouMayKnowHome";
 import Head from "next/head";
-import Image from "next/image";
-import Script from 'next/script'; // Import the Script component
-import { BiCopyright } from 'react-icons/bi'
 
 export default function Discover() {
   return (
