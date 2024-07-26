@@ -61,8 +61,8 @@ function LoginHome() {
                     </div>
                 </div>
                 <div className="  col-span-6">
-                    <Image src={LPImage} width={1200} height={500} className='hidden lg:inline' />
-                    <Image src={LPImageSM} width={1200} height={500} className='lg:hidden ' />
+                    <Image src={LPImage} width={1200} height={500} className='hidden lg:inline' alt='profile'/>
+                    <Image src={LPImageSM} width={1200} height={500} className='lg:hidden ' alt='profile' />
                 </div>
             </div>
             <span className='absolute z-50 -bottom-20 rounded-t-full lg:top-[30vh] lg:left-[30%]'>
@@ -81,7 +81,7 @@ function LoginHome() {
                         </div>
                         <div>
                             <div className='flex texm'>
-                                <p>Don't have an account yet? </p>
+                                <p>Don&apos;t have an account yet? </p>
                                 <p className='font-bold text-blue-600 hover:underline active:scale-105 cursor-pointer'>Sign Up</p>
                             </div>
                         </div>

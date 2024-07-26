@@ -29,8 +29,8 @@ function LandingPageMain() {
                     </div>
                 </div>
                 <div className="  col-span-6">
-                    <Image src={LPImage} width={1200} height={500} className='hidden lg:inline' />
-                    <Image src={LPImageSM} width={1200} height={500} className='lg:hidden ' />
+                    <Image src={LPImage} width={1200} height={500} className='hidden lg:inline' alt='profile'/>
+                    <Image src={LPImageSM} width={1200} height={500} className='lg:hidden ' alt='profile'/>
 
                 </div>
             </div>

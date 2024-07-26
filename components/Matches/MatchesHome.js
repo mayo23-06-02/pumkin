@@ -47,7 +47,7 @@ function MatchesHome() {
                     removeArrowOnDeviceType={["tablet", "mobile"]}
                     className=''>
                     {users.map((user) => (
-                        <div className='lg:mx-4 mx-2  '>\
+                        <div key={user._id} className='lg:mx-4 mx-2  '>\
                             <ProfileCard
                                 id={user._id}
                                 image={user.profilePicture}

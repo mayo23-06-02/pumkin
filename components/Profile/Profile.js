@@ -148,7 +148,7 @@ function ProfileHome() {
                 <div className='flex flex-col lg:flex-row items-center lg:space-y-0 space-y-6 lg:space-x-12'>
                     <div className='relative'>
                         {user.profilePicture ?
-                            <Image src={user.profilePicture} width={150} height={150} className='rounded-full' />
+                            <Image src={user.profilePicture} width={150} height={150} className='rounded-full' alt='profile' />
                             : <div onClick={() => setShowCropper(true)} className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
                                 <BiImageAdd className='text-5xl cursor-pointer active:scale-105' />
                             </div>
@@ -236,11 +236,11 @@ function ProfileHome() {
                     </div>
                     <div className='space-y-6'>
                         <div className='font-bold text-2xl'>
-                            <p>Posts</p>
+                            <p>Posts</p> 
                         </div>
                         <div className='grid grid-cols-3 gap-3 items-center'>
                             {userPosts.map((post, index) => (
-                                <Image id={post._id} src={post.imagePost} width={200} height={200} className='object-contain' />
+                                <Image key={index} id={post._id} src={post.imagePost} width={200} height={200} className='object-contain' alt='profile'/>
                             ))
                             }
                         </div>

@@ -131,7 +131,7 @@ function UserProfileHome() {
                             </div>
                             <div className="flex space-x-2 max-w-[90vw] overflow-auto py-2">
                                 {selectedUserData.hobbies.map((hobbie, index) => (
-                                    <div className='flex'>
+                                    <div key={index} className='flex'>
                                         <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{hobbie}</p>
                                     </div>
                                 ))}
@@ -143,7 +143,7 @@ function UserProfileHome() {
                             </div>
                             <div className=" flex space-x-2 max-w-[90vw] overflow-auto py-2">
                                 {selectedUserData.passions.map((passion, index) => (
-                                    <div className='flex '>
+                                    <div key={index} className='flex '>
                                         <p key={index} className='bg-[#D9D9D9] text-nowrap flex-wrap px-4 py-1 rounded-full font-semibold'>{passion}</p>
                                     </div>
                                 ))}
@@ -157,7 +157,7 @@ function UserProfileHome() {
                         <div className='grid grid-cols-3 gap-3'>
 
                             {selectedUserData.posts.map((post, index) => (
-                                <Image src={post.image} width={400} height={200} className='object-contain' />
+                                <Image key={index} src={post.image} width={400} height={200} className='object-contain' />
                             ))
                             }
                         </div>

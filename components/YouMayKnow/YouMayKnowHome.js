@@ -14,7 +14,6 @@ function YouMayKnowHome() {
     const [users, setUsers] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
 
-    const selectedUserEmail = "emily.johnson@example.com"
 
     useEffect(() => {
         const userData = cookies.get('userData')
@@ -73,7 +72,6 @@ function YouMayKnowHome() {
                                 surname={user.surname}
                                 name={user.name}
                                 image={user.profilePicture}
-                                id={user._id}
                                 hickies={user.hickies}
                                 pumpkins={user.pumpkins}
                                 dob={user.dob}

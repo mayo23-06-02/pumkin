@@ -7,8 +7,8 @@ import LPImageSM from '../../assets/images/BG - SM.jpg'
 function Slider() {
   return (
     <div className=''>
-        <Image src={LPImage} width={1280} height={500} className='hidden lg:inline' />
-        <Image src={LPImage} width={800} height={500} className=' lg:hidden' />
+        <Image src={LPImage} width={1280} height={500} className='hidden lg:inline' alt='profile' />
+        <Image src={LPImage} width={800} height={500} className=' lg:hidden' alt='profile' />
     </div>
   )
 }
