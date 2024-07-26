@@ -19,10 +19,6 @@ export default function Discover() {
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="utf-8" />
       </Head>
-      <Script
-        src="https://widget.Cloudinary.com/v2.0/global/all.js"
-        strategy="lazyOnload" // Load the script lazily
-      />
       <main className="flex h-screen w-screen overflow-auto bg-gradient-to-l justify-center from-[#EFEFEF] to-[#EFEFEF] z-[-1]">
         <div className="items-center flex flex-col">
           <span className='flex z-50 w-screen'>

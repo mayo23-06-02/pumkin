@@ -9,10 +9,7 @@ const UserProfile = () => {
         <title>Profile - Pumpkin</title>
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="utf-8" />
-        <script
-          src="https://widget.Cloudinary.com/v2.0/global/all.js"
-          type="text/javascript"
-        ></script>
+        
       </Head>
       <main className=" flex  h-screen w-screen overflow-auto
 bg-gradient-to-l justify-center from-[#EFEFEF]   to-[#EFEFEF]
