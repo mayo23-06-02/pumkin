@@ -66,8 +66,8 @@ export default function SearchBar() {
 
   return (
     <div>
-      <div className='flex w-full flex-col space-y-8 py-12 lg:py-24 px-6 lg:items-center'>
-        <p className='font-extrabold text-3xl lg:text-7xl px-'>Discover Potential Dates</p>
+      <div className='flex w-full flex-col space-y-8 py-12 lg:py-24 lg:px-6 px-4 lg:items-center'>
+        <p className='font-extrabold text-2xl lg:text-7xl px-'>Discover Potential Dates</p>
         <div className='space-x-4 relative flex items-center'>
           <input
             placeholder='Search people...'
@@ -83,11 +83,13 @@ export default function SearchBar() {
           </span>
           <span className={`absolute top-[115%] max-h-[50vh] overflow-auto z-50 rounded-xl -left-4 w-full lg:w-[40vw] bg-white ${showSuggestionBox ? 'block' : 'hidden'}`}>
             {suggestedUsers.map((suggestedUser, index) => (
-              <div key={index} className='px-6 py-6 flex space-x-6 border-b border-gray-100 w-full cursor-pointer' onClick={() => {
+              <div key={index} className='lg:px-6 px-2 py-6 flex space-x-6 border-b border-gray-100 w-full cursor-pointer' onClick={() => {
                 router.push('../../../user-profile')
                 setCookie('selectedUserProfile', suggestedUser._id)
               }}>
-                <Image src={Image01} width={82} height={82} className='rounded-full' />
+                <Image src={Image01} width={62} height={62} className='rounded-full hidden lg:inline' alt='profile' />
+                <Image src={Image01} width={82} height={82} className='rounded-full lg:hidden' alt='profile'  />
+
                 <div className='flex flex-col space-y-2'>
                   <div className='flex font-bold text-2xl space-x-4'>
                     <p>{suggestedUser.name}</p>

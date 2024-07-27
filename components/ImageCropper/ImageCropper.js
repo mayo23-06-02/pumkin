@@ -129,6 +129,9 @@ const ImageCropper = () => {
     useEffect(() => {
         if (savedImageUrl) {
             handleSubmit();
+            router.refresh();
+
+
         }
     }, [savedImageUrl]);
 
@@ -152,6 +155,7 @@ const ImageCropper = () => {
             if (response.ok) {
                 // Update the UI optimistically
                 alert("Profile updated successfully!");
+                router.refresh()
             } else {
                 const error = await response.json();
                 alert(`Error updating profile: ${error.message}`);
@@ -164,7 +168,7 @@ const ImageCropper = () => {
     }
 
     return (
-        <div className=" fixed flex flex-col py-8 px-6 l space-y-16  items-center w-[50vw]  bg-white rounded-3xl ">
+        <div className=" fixed flex flex-col py-8 px-6 l space-y-16  items-center lg:w-[50vw] w-[90vw]  bg-white rounded-3xl ">
             <div className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
                 <BiImageAdd className='text-5xl cursor-pointer active:scale-105' />
             </div>
@@ -196,6 +200,7 @@ const ImageCropper = () => {
                                 </ReactCrop>
                                 <button
                                     onClick={() => {
+                                        router.refresh();
                                         handleSave()
                                     }}
                                     className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
@@ -212,7 +217,7 @@ const ImageCropper = () => {
                         )}
                     </div>
                 </div>
-                
+
             </div>
         </div>
     );

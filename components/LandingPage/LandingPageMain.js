@@ -23,7 +23,7 @@ function LandingPageMain() {
                         <div className='pt-12'>
 
                             <Button label="Create Account" variant={"secondary"} onClick={()=> {
-                                router.push('../../login')
+                                router.push('../../signup')
                             }} />
                         </div>
                     </div>
@@ -34,7 +34,7 @@ function LandingPageMain() {
 
                 </div>
             </div>
-            <span className='absolute z-50 top-[50%]'>
+            <span className='absolute z-50 top-[40%]'>
                 <div className='lg:hidden'>
                     <div className="  col-span-6 flex-col space-y-3 text-white flex  items-center px-12 ">
                         <div className="text-white flex justify-center flex-col items-center font-bold space-y-2 text-5xl">
@@ -42,7 +42,7 @@ function LandingPageMain() {
                             <p>To Pumpkin</p>
                         </div>
                         <p className='text-xl'>Where true love meets fortune</p>
-                        <div className='pt-12 space-y-2 flex items-center justify-center flex-col'>
+                        <div className='pt-12 space-y-4 flex items-center justify-center flex-col'>
                             <Button label="Create Account" variant={"secondary"}  onClick={()=> {
                                 router.push('../../signup')
                             }}  />

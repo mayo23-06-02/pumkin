@@ -56,44 +56,44 @@ function ProfileHome() {
 
     useEffect(() => {
         const email = cookies.get('email');
-    
+
         fetch('/api/auth')
-          .then((res) => res.json())
-          .then((data) => {
-            setUsers(data);
-            const selectedUser = data.find(
-              (user) => user.email === email
-            );
-            console.log(selectedUser);
-            if (selectedUser) {
-              setUser(selectedUser);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching auth data:", error);
-          });
-    
+            .then((res) => res.json())
+            .then((data) => {
+                setUsers(data);
+                const selectedUser = data.find(
+                    (user) => user.email === email
+                );
+                console.log(selectedUser);
+                if (selectedUser) {
+                    setUser(selectedUser);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching auth data:", error);
+            });
+
         fetch('/api/post-image')
-          .then((res) => res.json())
-          .then((data) => {
-            const selectedPosts = data.filter(
-              (post) => post.email === email
-            );
-            console.log(selectedPosts);
-            if (selectedPosts.length > 0) {
-              setUserPosts(selectedPosts);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching post data:", error);
-          });
-    
-      }, [cookies]);
-    
-      useEffect(() => {
-        console.log("userPosts",userPosts);
-      }, [userPosts]);
-    
+            .then((res) => res.json())
+            .then((data) => {
+                const selectedPosts = data.filter(
+                    (post) => post.email === email
+                );
+                console.log(selectedPosts);
+                if (selectedPosts.length > 0) {
+                    setUserPosts(selectedPosts);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching post data:", error);
+            });
+
+    }, [cookies]);
+
+    useEffect(() => {
+        console.log("userPosts", userPosts);
+    }, [userPosts]);
+
 
 
     function formatDate(dateString) {
@@ -136,8 +136,8 @@ function ProfileHome() {
 
     if (user) {
         return (
-            <div className=' relative bg-gradient-to-b space-y-12 from-black/5 to-white/0 py-20 px-8 lg:px-16'>
-                <span className={`absolute z-50 right-[80%]  ${showCropper ? "block" : "hidden"}`}>
+            <div className=' relative bg-gradient-to-b space-y-12 from-black/5 to-white/0 lg:py-20 py-2 px-8 lg:px-16'>
+                <span className={`absolute z-50 lg:left-[25%] left-10 top-15   ${showCropper ? "block" : "hidden"}`}>
                     <div className='relative flex-1'>
                         <div className='absolute'>
                             <BiPlus />
@@ -191,7 +191,7 @@ function ProfileHome() {
                         </div>
                     </div>
 
-                    <div className='flex space-x-16 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-12 flex-col lg:space-y-0 '>
+                    <div className='flex lg:space-x-16 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-12 flex-col lg:space-y-0 '>
                         <p className='hover:scale-105 cursor-pointer' onClick={() => setSetshowEditBox(true)}>Edit Profile</p>
                         <div>
                             <Button label={"Post"} variant={"primary"} onClick={() => {
@@ -227,20 +227,23 @@ function ProfileHome() {
                             <div className='font-bold text-2xl'>
                                 <p>Passions</p>
                             </div>
-                            <div className=" flex space-x-4">
+                            <div className="flex space-x-4 overflow-x-auto w-[90vw]">
+                                {/* Use overflow-x-auto to enable horizontal scrolling */}
                                 {user.passions.map((passion, index) => (
-                                    <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{passion}</p>
+                                    <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>
+                                        {passion}
+                                    </p>
                                 ))}
                             </div>
                         </div>
                     </div>
                     <div className='space-y-6'>
                         <div className='font-bold text-2xl'>
-                            <p>Posts</p> 
+                            <p>Posts</p>
                         </div>
                         <div className='grid grid-cols-3 gap-3 items-center'>
                             {userPosts.map((post, index) => (
-                                <Image key={index} id={post._id} src={post.imagePost} width={200} height={200} className='object-contain' alt='profile'/>
+                                <Image key={index} id={post._id} src={post.imagePost} width={200} height={200} className='object-contain' alt='profile' />
                             ))
                             }
                         </div>

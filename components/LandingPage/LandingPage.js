@@ -321,26 +321,26 @@ function LandingPage() {
         }
     ]
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        for (let i = 0; i < userProfiles.length; i++) {
-            fetch("/api/auth", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userProfiles[i]),
-            })
-                .then(async (response) => {
-                    const result = await response.json();
-                    console.log(result);
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        }
+    //     for (let i = 0; i < userProfiles.length; i++) {
+    //         fetch("/api/auth", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(userProfiles[i]),
+    //         })
+    //             .then(async (response) => {
+    //                 const result = await response.json();
+    //                 console.log(result);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error:", error);
+    //             });
+    //     }
 
-    }, [])
+    // }, [])
 
     return (
         <div className="flex w-full flex-col h-full">

@@ -24,9 +24,8 @@ function YouMayKnowHome() {
             .then((res) => res.json())
             .then((data) => {
                 // Filter out the user with the selectedUserEmail
-                const filteredUsers = data.filter(u => u.email !== selectedUserEmail);
                 // Randomize the order of the users
-                const randomizedUsers = filteredUsers.sort(() => Math.random() - 0.5);
+                const randomizedUsers = data.sort(() => Math.random() - 0.5);
                 setUsers(randomizedUsers)
             })
     }, [cookies])
@@ -54,7 +53,7 @@ function YouMayKnowHome() {
 
     return (
         <div className='max-w-[100vw]  px-6 pt-6 lg:p-0 lg:max-w-[1280px]'>
-            <p className='text-3xl lg:text-2xl lg:py-12 py-8  font-bold text-[#2C2A2A]'>People You May Know</p>
+            <p className='text-xl lg:text-2xl lg:py-12 pb-8  font-bold text-[#2C2A2A]'>People You May Know</p>
             <div className=''>
                 <Carousel
                     swipeable={true}

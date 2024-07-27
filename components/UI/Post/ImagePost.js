@@ -2,11 +2,13 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import UserImage from '../../../assets/images/User01.png'
-import { BiDotsHorizontal, BiDotsVerticalRounded, BiHeart } from 'react-icons/bi'
+import { BiArrowBack, BiDotsHorizontal, BiDotsVerticalRounded, BiHeart } from 'react-icons/bi'
 import Button from '../Button/Button'
-import { useCookies } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { setCookie } from 'cookies-next'
 
-function UserPost({surname, profilePicture, username, image, caption}) {
+function UserPost({surname, profilePicture, username, image, caption, _id}) {
+  const router = useRouter()
   const [showMenu, setShowMenu] = useState(false)
   function handleMenu(params) {
     if (showMenu === false) {
@@ -44,19 +46,17 @@ function UserPost({surname, profilePicture, username, image, caption}) {
 
   return (
     <div>
-      <div className='bg-white shadow flex justify-between items-center px-8 py-4'>
+      <div className='bg-white shadow flex justify-between items-center px-4 lg:px-8 lg:py-4 py-2'>
         <div className='flex space-x-4 items-center '>
           <div>
             <Image src={profilePicture} width={50} height={50} className='rounded-full' />
           </div>
           <div className=''>
-            <div className='flex text-2xl space-x-2 font-bold'>
+            <div className='flex lg:text-2xl text-xl space-x-2 font-bold'>
               <p>{username}</p>
               <p>{surname}</p>
             </div>
-            <div>
-              <p className='flex text-gray-500  text-lg'>Manzini</p>
-            </div>
+            
           </div>
         </div>
         <div className='relative'>
@@ -66,7 +66,10 @@ function UserPost({surname, profilePicture, username, image, caption}) {
           <span className={`right-0 top-[120%] absolute w-64  py-6 bg-white rounded-lg shadow ${showMenu? "block":" hidden"}`}>
               <ul>
                 <li className='py-2 px-6 text-xl hover:bg-gray-100 cursor-pointer font-semibold'>
-                  <p className='whitespace-nowrap'>View Profile</p>
+                  <p onClick={() => {
+                    setCookie('selectedUserProfile', _id)
+                    router.push('../../profile')
+                  }} className='whitespace-nowrap'>View Profile</p>
                 </li>
                 <li className='py-2 px-6 text-xl hover:bg-gray-100 cursor-pointer font-semibold'>
                   <p className='whitespace-nowrap'>Block/Hide</p>
@@ -80,21 +83,24 @@ function UserPost({surname, profilePicture, username, image, caption}) {
       </div>
       <div className='flex w-full  items-center justify-center'>
         <div className='space-y-4'>
-          <Image src={image} width={500} height={800} />
-          <div className='text-xl font-semibold'>
+          <Image src={image} width={600} height={800} />
+          <div className='lg:text-xl sm:w-screen lg:w-[600px] px-4 lg:px-0 text-sm font-semibold'>
             <p>{caption}</p>
           </div>
         </div>
       </div>
-      <div className='flex px-8 py-6 items-center space-x-6'>
+      <div className='flex lg:px-8 px-4 lg:py-6 py-2 items-center lg:space-x-6 space-x-2'>
         <div className='flex items-center flex-col space-y-1'>
-          <BiHeart className='text-4xl' />
+          <BiHeart className='lg:text-4xl text-3xl' />
         </div>
         <div className='flex w-full'>
-          <input placeholder='Type comment...' className='rounded-full bg-gray-100 h-16 px-6 w-full' />
+          <input placeholder='Type comment...' className='rounded-full bg-gray-100 lg:h-16 h-10 px-6 w-full' />
         </div>
         <div>
-          <Button variant={'primary'} label={'Share'} />
+          <Button variant={'primary'} label={'Share'} className='hidden lg:inline' />
+          <button className='bg-black text-white rounded-full p-3'>
+            <BiArrowBack className='rotate-180 ' />
+          </button>
         </div>
       </div>
     </div>

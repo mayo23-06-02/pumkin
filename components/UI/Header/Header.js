@@ -10,11 +10,11 @@ import { useRouter } from 'next/navigation'
 function Header() {
     const router = useRouter()
     return (
-        <div className="relative w-full h-16 lg:h-32
-             bg-white/5 bg-opacity-20 backdrop-blur-lg flex lg:justify-between justify-center  p-10">
+        <div className="relative w-full 
+             bg-white/5 bg-opacity-20 backdrop-blur-lg flex lg:justify-between justify-center px-8 py-4 ">
             <div className="flex justify-between space-x-3 items-center ">
-                <Image src={Logo} width={50} height={50}  className='hidden lg:inline' />
-                <Image src={Pumpkin} width={100} height={80} className='scale-125' />
+                <Image src={Logo} width={50} height={50}  className='hidden lg:inline pr-4' />
+                <Image src={Pumpkin} width={100} height={80} className='lg:scale-125' />
             </div>
             <div className='hidden lg:inline'>
                 <div className="flex justify-between space-x-3 items-center "	>

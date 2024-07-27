@@ -1,11 +1,11 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import UserPost from '../UI/Post/ImagePost'
+import React, { useEffect, useState } from 'react';
+import UserPost from '../UI/Post/ImagePost';
 
 function FeedPosts() {
-  const [posts, setPosts] = useState([])
-  const [users, setUsers] = useState([]) // Corrected variable name to 'users'
-  const [userPosts, setUserPosts] = useState([])
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]); // Corrected variable name to 'users'
+  const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
     const fetchUsersAndPosts = async () => {
@@ -34,7 +34,8 @@ function FeedPosts() {
           };
         });
 
-        setUserPosts(processedPosts);
+        // Reverse the order of posts
+        setUserPosts(processedPosts.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -46,18 +47,19 @@ function FeedPosts() {
   return (
     <div>
       {userPosts.map(post => (
-        <UserPost 
-          key={post.id} 
-          username={post.name} 
-          surname={post.surname}
-          email={post.email}
-          caption={post.caption} 
-          image={post.imagePost} 
-          profilePicture={post.profilePicture} // Assuming UserPost component can handle this prop
-        />
+        <div className='pt-4' key={post.id}>
+          <UserPost
+            username={post.name}
+            surname={post.surname}
+            email={post.email}
+            caption={post.caption}
+            image={post.imagePost}
+            profilePicture={post.profilePicture} // Assuming UserPost component can handle this prop
+          />
+        </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default FeedPosts
+export default FeedPosts;

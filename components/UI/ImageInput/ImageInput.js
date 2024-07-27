@@ -20,6 +20,7 @@ export default function ImageInput() {
     const [loading, setLoading] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null)
     const [savedImageURL, setSavedImageURL] = useState(null)
+    const [showImageIcon, setShowImageIcon] = useState(true)
 
     const uploadPost = async () => {
         const userData = cookies.get('userData')
@@ -87,6 +88,7 @@ export default function ImageInput() {
     }
 
     const addImageToPost = (e) => {
+        setShowImageIcon(false)
         const reader = new FileReader()
         if (e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
@@ -97,8 +99,8 @@ export default function ImageInput() {
     }
 
     return (
-        <div className=' w-full flex justify-center pt-16 '>
-            <div className='flex w-full items-center justify-center bg-white max-w-[500px] rounded-2xl shadow-lg py-16 flex-col space-y-12 px-12' >
+        <div className=' w-full flex justify-center lg:pt-16 '>
+            <div className='flex w-full items-center justify-center lg:bg-white max-w-[500px] rounded-2xl lg:shadow-lg lg:py-16 py-8 flex-col space-y-12 lg:px-12 px-6' >
                 <div className='flex w-full '>
                     <Link href={'../../../profile'}>
                         <BiLeftArrowAlt className='text-4xl' />
@@ -107,7 +109,7 @@ export default function ImageInput() {
                 <div>
                     {selectedFile && <Image src={selectedFile} width={300} height={300} />}
                 </div>
-                <div onClick={() => filePickerRef.current.click()} className='flex items-center justify-center cursor-pointer hover:scale-105 flex-col space-y-4 py-16'>
+                <div onClick={() => filePickerRef.current.click()} className={`flex items-center justify-center cursor-pointer hover:scale-105 flex-col space-y-4 py-16 ${showImageIcon? '' : 'hidden'}`}>
                     <Image src={addImage} width={50} height={100} />
                     <p className='text-xl  '>Upload Image</p>
                 </div>
@@ -123,7 +125,7 @@ export default function ImageInput() {
                     <input
                         ref={captionRef}
                         placeholder='add caption here'
-                        className='w-full outline-none'
+                        className='w-full outline-none rounded-full px-4 py-2'
                     />
                     <div className="">
                         <Button disabled={!selectedFile} onClick={uploadPost} label={'Post'} variant={"primary"} />

@@ -33,23 +33,24 @@ function ProfileCard({ id ,username, name, image, surname = '', hickies, pumpkin
         return age;
     }
     return (
-        <div className=' relative px-4 items-center space-y-12 flex-col flex '>
+        <div className=' relative px-4 items-center space-y-4 lg:space-y-6 flex-col flex w-full' onClick={() => {
+            setCookie('selectedUserProfile', id)
+            router.push(`../../user-profile`)
+        }}>
             <Image src={image} width={200} height={200} className='rounded-full' />
             <span className='  bottom-0    rounded-b-[12px] px-2 lg:px-6'>
-                <div  className='text-black lg:space-y-2 -space-y-1 flex flex-col items-center '>
-                    <div className='flex font-bold  text-2xl lg:text-3xl space-x-3'>
+                <div  className='text-black  lg:space-y-2 -space-y-1 lg:-space-x-2 flex flex-col w-full items-center '>
+                    <div className='flex font-bold  text-xl lg:text-3xl space-x-3'>
                         <div className='space-x-1 flex'>
                             <p>{name}</p>
                             <p>{getSurnameInitials(surname)},</p>
                         </div>
                         <p>{calculateAge(dob)}</p>
                     </div>
-                    <div className='flex  lg:text-xl pt-2 space-x-2'>
-                        <p>{pumpkins} Pumkins</p>
-                        <p>-</p>
-                        <p>{hickies} Hickies</p>
+                    <div className='flex  lg:text-xl pt-2 text-xs  line-clamp-1 text-nowrap space-x-2'>
+                        <p className=' text-nowrap line-clamp-1'>{pumpkins} Pumkins - {hickies} Hickies</p>
                     </div>
-                    <div className='flex pt-6'>
+                    <div className='hidden lg:inline pt-6'>
                         <Button label={'View Profile'} variant={"primary"} onClick={() => {
                             setCookie('selectedUserProfile', id)
                             router.push(`../../user-profile`)

@@ -25,8 +25,7 @@ const Button = ({
     }
   };
 
-  const handleClick = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+  const handleClick = async () => {
     setIsLoading(true);
     try {
       if (onClick) {
@@ -41,7 +40,7 @@ const Button = ({
     <button
       onClick={handleClick}
       disabled={disabled || isLoading}
-      className={`py-5 flex-nowrap justify-center flex min-w-48 lg:min-w-64 w-full font-bold rounded-full text-sm lg:text-xl transition-colors duration-300 ${getButtonStyles()} ${className}`}
+      className={`py-5 lg:py-4 flex-nowrap justify-center flex min-w-64 lg:min-w-64 w-full font-bold rounded-full text-sm lg:text-xl transition-colors duration-300 ${getButtonStyles()} ${className}`}
     >
       {isLoading ? (
         <Image src={Loader} alt="Loading..." className="h-6 w-6 mr-2" width={24} height={24} />

@@ -2,6 +2,7 @@ import SearchBar from "@/components/Discover/SearchBar";
 import MainHeader from "@/components/UI/Header/MainHeader";
 import YouMayKnowHome from "@/components/YouMayKnow/YouMayKnowHome";
 import Head from "next/head";
+import { BiCopyright } from "react-icons/bi";
 
 export default function Discover() {
   return (
@@ -11,7 +12,7 @@ export default function Discover() {
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="utf-8" />
       </Head>
-      <main className="flex h-screen w-screen overflow-auto bg-gradient-to-l justify-center from-[#EFEFEF] to-[#EFEFEF] z-[-1]">
+      <main className="flex h-screen pb-6 w-screen overflow-auto bg-gradient-to-l justify-center from-[#EFEFEF] to-[#EFEFEF] z-[-1]">
         <div className="items-center flex flex-col">
           <span className='flex z-50 w-screen'>
             <MainHeader />
@@ -21,6 +22,7 @@ export default function Discover() {
             <YouMayKnowHome />
           </div>
         </div>
+       
       </main>
     </div>
   );

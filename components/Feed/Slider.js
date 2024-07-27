@@ -8,7 +8,7 @@ function Slider() {
   return (
     <div className=''>
         <Image src={LPImage} width={1280} height={500} className='hidden lg:inline' alt='profile' />
-        <Image src={LPImage} width={800} height={500} className=' lg:hidden' alt='profile' />
+        <Image src={LPImage} width={800} height={200} className=' lg:hidden object-contain' alt='profile' />
     </div>
   )
 }

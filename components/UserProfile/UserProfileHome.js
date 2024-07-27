@@ -141,7 +141,7 @@ function UserProfileHome() {
                             <div className='font-bold text-2xl'>
                                 <p>Passions</p>
                             </div>
-                            <div className=" flex space-x-2 max-w-[90vw] overflow-auto py-2">
+                            <div className=" flex space-x-2 sm:w-[90vw] overflow-auto  py-2">
                                 {selectedUserData.passions.map((passion, index) => (
                                     <div key={index} className='flex '>
                                         <p key={index} className='bg-[#D9D9D9] text-nowrap flex-wrap px-4 py-1 rounded-full font-semibold'>{passion}</p>
