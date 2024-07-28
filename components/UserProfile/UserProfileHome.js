@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation'
 import { getCookie, setCookie } from 'cookies-next'
 import { useCookies } from 'next-client-cookies'
 import ImageInput from '../UI/ImageInput/ImageInput'
+import TextInput from '../UI/Text Input/TextInput'
+import { BiImageAdd, BiPlus, BiUser } from 'react-icons/bi'
 
 
 function UserProfileHome() {
@@ -15,6 +17,19 @@ function UserProfileHome() {
     const [users, setUsers] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
     const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
+    const [isShooter, setIsShooter] = useState(true)
+    const [showShooter, setShowShooter] = useState(true)
+    const [setspecialName, setSetspecialName] = useState("")
+    const [message, setMessage] = useState("")
+    const [hint, setHint] = useState("")
+
+    function toggleShooter() {
+        setShowShooter(!showShooter)
+    }
+
+    function toggleIsShooter() {
+        setIsShooter(!isShooter)
+    }
 
     useEffect(() => {
         const _id = cookies.get('selectedUserProfile')
@@ -23,7 +38,7 @@ function UserProfileHome() {
             .then((data) => {
                 setUsers(data)
                 const selectedUser = data.find(
-                    (user) => user._id === _id
+                    (user) => user.email === _id
                 );
                 setUserSelectedUserData(selectedUser)
             })
@@ -67,13 +82,95 @@ function UserProfileHome() {
     const age = calculateAge(dateOfBirth);
     console.log(`Your age is ${age} years.`); // Output: Your age is 33 years.
 
+    const [shooterRequest, setShooterRequest] = useState([])
+
+    function handleSubmit(e) {
+        setShowShooter(true)
+        e.preventDefault();
+        const timestamp = new Date().toISOString(); // Create a timestamp
+        const senderEmail = cookies.get('email');
+        const senderData = JSON.parse(cookies.get('userData'))
+        const shooterRequestData = {
+            "specialName": setspecialName,
+            "hint": hint,
+            "message": message
+        }
+        setShooterRequest(shooterRequestData)
+        let res = fetch("/api/shooter", {
+            method: "POST",
+            body: JSON.stringify({
+                "senderEmail": senderEmail,
+                "senderData": senderData,
+                "email": selectedUserData.email,
+                "shooter": shooterRequestData,
+                "timestamp": timestamp,
+                "seen": false
+            }),
+        }).then(async (response) => {
+            const result = await response.json();
+            alert("Shoter Request Submitted")
+
+        });
+
+    }
+
+
 
     if (selectedUserData) {
         return (
-            <div className=' relative bg-gradient-to-b space-y-12 from-black/5 to-white/0 py-20 px-8 lg:px-16'>
+            <div className=' relative bg-gradient-to-b space-y-12 from-black/5 to-white/0 lg:py-20 py-6 px-8 lg:px-16'>
+                <div className={`${showShooter ? 'hidden' : 'block'}`}>
+                    {isShooter ?
+                        <div className='fixed text-white     flex flex-col py-16 px-6 l space-y-10  items-center lg:left-[35%] lg:w-[30vw] w-[88vw]  bg-[#FF7518] rounded-3xl'>
+
+                            <div className=' flex flex-col items-center text-lg font-semibold'>
+                                <p>Heey, {selectedUserData.name}</p>
+                                <p>Welcome to Pumpkins Shot Shooter</p>
+                            </div>
+                            <div className='text-justify'>
+                                <p>Shot Shooter lets you hit your crush up without having to go through the gwaabs, aka - gwababa, coz weve got you. This happens anonymously, and they never get to know its you. Take the chance, send them a sweet text. </p>
+                            </div>
+                            <div className='flex flex-col items-center space-y-2'>
+                                <button onClick={toggleIsShooter} className='bg-black px-24 text-white rounded-full font-bold py-4'>
+                                    <p>Shoot</p>
+                                </button>
+                                <p className='hover:underline cursor-pointer' onClick={toggleShooter}>Cancel</p>
+                            </div>
+                        </div>
+                        :
+                        <div className='fixed text-white     flex flex-col py-16 px-6 l space-y-6  items-center lg:left-[35%] lg:w-[30vw] w-[88vw]  bg-[#FF7518] rounded-3xl'>
+                            <div className='w-full space-y-2'>
+                                <p className='text-sm'>What special name no you want them to know you by?</p>
+                                <input type="text" className='w-full py-2 px-4 rounded-xl text-black' value={setspecialName} onChange={(e) => setSetspecialName(e.target.value)} />
+                            </div>
+                            <div className='w-full space-y-2'>
+                                <p className='text-sm'>Shoot your shot player, Whats your message to them?</p>
+                                <textarea type="text" className='w-full py-2 px-4 rounded-xl text-black' value={message} onChange={(e) => setMessage(e.target.value)} />
+                            </div>
+                            <div className='w-full space-y-2'>
+                                <p className='text-sm'>Wanna drop a young hint, dont be too obvious now!</p>
+                                <input type="text" className='w-full py-2 px-4 rounded-xl text-black' value={hint} onChange={(e) => setHint(e.target.value)} />
+                            </div>
+                            <div className='flex flex-col items-center space-y-2'>
+                                <button onClick={handleSubmit} className='bg-black px-24 text-white rounded-full font-bold py-4'>
+                                    <p>Shoot</p>
+                                </button>
+                                <p className='hover:underline cursor-pointer' onClick={() => {
+                                    toggleShooter()
+                                    toggleIsShooter()
+                                }}>Cancel</p>
+                            </div>
+                        </div>
+                    }
+                </div>
                 <div className='flex flex-col lg:flex-row items-center lg:space-y-0 space-y-6 lg:space-x-12'>
                     <div>
-                        <Image src={selectedUserData.profilePicture} width={200} height={200} className='rounded-full' />
+                        {selectedUserData.profilePicture ?
+                            <Image src={selectedUserData.profilePicture} width={150} height={150} className='rounded-full' alt='profile' />
+                            : <div  className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
+                                <BiUser className='text-5xl cursor-pointer active:scale-105' />
+                            </div>
+                        }
                     </div>
                     <div className='flex flex-col items-center lg:items-start space-y-2'>
                         <div className='flex font-bold text-3xl space-x-2 lg:space-x-4 lg:text-5xl'>
@@ -104,7 +201,7 @@ function UserProfileHome() {
                     </div>
 
                     <div className='flex lg:space-x-16 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-10 flex-col lg:space-y-0 '>
-                        <p className='hover:scale-105 cursor-pointer'>Shoot Your Shot</p>
+                        <p onClick={toggleShooter} className='hover:scale-105 cursor-pointer'>Shoot Your Shot</p>
                         <div>
                             <Button label={"Pumkin"} variant={"primary"} onClick={() => {
                                 router.push('../../post')

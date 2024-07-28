@@ -7,7 +7,7 @@ import Button from '../Button/Button'
 import { useRouter } from 'next/navigation'
 import { setCookie } from 'cookies-next'
 
-function UserPost({surname, profilePicture, username, image, caption, _id}) {
+function UserPost({surname, profilePicture, email, username, image, caption, _id}) {
   const router = useRouter()
   const [showMenu, setShowMenu] = useState(false)
   function handleMenu(params) {
@@ -43,7 +43,7 @@ function UserPost({surname, profilePicture, username, image, caption, _id}) {
     });
 
 }
-
+  console.log("id:", _id);
   return (
     <div>
       <div className='bg-white shadow flex justify-between items-center px-4 lg:px-8 lg:py-4 py-2'>
@@ -67,16 +67,11 @@ function UserPost({surname, profilePicture, username, image, caption, _id}) {
               <ul>
                 <li className='py-2 px-6 text-xl hover:bg-gray-100 cursor-pointer font-semibold'>
                   <p onClick={() => {
-                    setCookie('selectedUserProfile', _id)
-                    router.push('../../profile')
+                    setCookie('selectedUserProfile', email)
+                    router.push('../../user-profile')
                   }} className='whitespace-nowrap'>View Profile</p>
                 </li>
-                <li className='py-2 px-6 text-xl hover:bg-gray-100 cursor-pointer font-semibold'>
-                  <p className='whitespace-nowrap'>Block/Hide</p>
-                </li>
-                <li className='py-2 px-6 text-xl hover:bg-gray-100 cursor-pointer font-semibold'>
-                  <p className='whitespace-nowrap'>Report</p>
-                </li>
+               
               </ul>
           </span>
         </div>
@@ -97,8 +92,8 @@ function UserPost({surname, profilePicture, username, image, caption, _id}) {
           <input placeholder='Type comment...' className='rounded-full bg-gray-100 lg:h-16 h-10 px-6 w-full' />
         </div>
         <div>
-          <Button variant={'primary'} label={'Share'} className='hidden lg:inline' />
-          <button className='bg-black text-white rounded-full p-3'>
+          <Button variant={'primary'} label={'Share'} className=' hidden lg:inline ' />
+          <button className='bg-black text-white rounded-full p-3 lg:hidden'>
             <BiArrowBack className='rotate-180 ' />
           </button>
         </div>

@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 
-function ProfileCard({ id ,username, name, image, surname = '', hickies, pumpkins, dob }) {
+function ProfileCard({ id ,username,email, name, image, surname = '', hickies, pumpkins, dob }) {
     function getSurnameInitials(surname) {
         // Split the surname into an array of words
         const surnameWords = (surname || '').trim().split(' ');
@@ -34,7 +34,7 @@ function ProfileCard({ id ,username, name, image, surname = '', hickies, pumpkin
     }
     return (
         <div className=' relative px-4 items-center space-y-4 lg:space-y-6 flex-col flex w-full' onClick={() => {
-            setCookie('selectedUserProfile', id)
+            setCookie('selectedUserProfile', email)
             router.push(`../../user-profile`)
         }}>
             <Image src={image} width={200} height={200} className='rounded-full' />

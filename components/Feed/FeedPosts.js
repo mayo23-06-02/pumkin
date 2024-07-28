@@ -30,7 +30,8 @@ function FeedPosts() {
             ...post,
             profilePicture: user?.profilePicture,
             name: user?.name,
-            surname: user?.surname
+            surname: user?.surname,
+            _id: user?._id
           };
         });
 
@@ -49,6 +50,7 @@ function FeedPosts() {
       {userPosts.map(post => (
         <div className='pt-4' key={post.id}>
           <UserPost
+            _id={post._id}
             username={post.name}
             surname={post.surname}
             email={post.email}

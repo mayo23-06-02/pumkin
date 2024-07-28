@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Logo from '../../../assets/images/logo 2.png'
 import Pumpkin from '../../../assets/images/Pumpkin 2.png'
@@ -7,9 +7,13 @@ import Image from 'next/image'
 import Button from '../Button/Button'
 import Link from 'next/link'
 import { BiAlarm, BiBell, BiMenu, BiMessage, BiMessageAlt, BiMessageAltDetail, BiNotification, BiPlus, BiUser } from 'react-icons/bi'
+import { useCookies } from 'next-client-cookies'
 
 function MainHeader() {
     const [showSideDrawer, setshowSideDrawer] = useState(false)
+    const [shooterNotification, setShooterNotification] = useState([])
+    const [userNotifications, setUserNotifications] = useState([])
+    const [unseenNotifications, setUnseenNotifications] = useState([])
 
     function onToggleSideDrawer(params) {
         if (showSideDrawer == false) {
@@ -19,6 +23,38 @@ function MainHeader() {
         }
     }
 
+    const cookies = useCookies()
+
+    useEffect(() => {
+        const email = cookies.get('email')
+        console.log(email);
+        fetch('/api/shooter')
+            .then((res) => res.json())
+            .then((data) => {
+                setShooterNotification(data)
+                const selectedNotifications = data.filter(
+                    (post) => post.email === email
+                );
+              
+                console.log(selectedNotifications);
+                if (selectedNotifications.length > 0) {
+                    setUserNotifications(selectedNotifications);
+                }
+            })
+
+            
+    }, [])
+
+    useEffect(() => {
+        const unseenNotifications = userNotifications.filter(
+            (post) => post.seen === false
+        );
+        if (unseenNotifications.length > 0) {
+            setUnseenNotifications(unseenNotifications);
+        }
+    }, [userNotifications]);
+
+    console.log(unseenNotifications,"sila");
 
 
     return (
@@ -93,7 +129,7 @@ function MainHeader() {
                                 <BiBell className='lg:text-4xl text-2xl' />
                             </Link>
                             <span className='absolute text-white lg:-right-2 right-0 font-semibold -top-2  bg-black lg:h-6 h-4 lg:w-6 w-4 text-xs lg:text-base flex items-center justify-center p-1 rounded-full'>
-                                <p>2</p>
+                                <p>{unseenNotifications.length}</p>
                             </span>
                         </div>
                         <div>

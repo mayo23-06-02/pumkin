@@ -66,6 +66,7 @@ function YouMayKnowHome() {
                     {users.map((user) => (
                         <div key={user._id}>
                             <ProfileCard
+                                email={user.email}
                                 id={user._id}
                                 username={user.username}
                                 surname={user.surname}
