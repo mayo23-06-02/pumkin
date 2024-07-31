@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Matches() {
   return (
     <main className=" flex justify-center h-screen w-full overflow-auto
-   bg-white
+   bg-gradient-to-b from-[#C3530A]  to-[#191222]
      z-[-1]">
       <span className='absolute z-50 w-full'>
       </span>

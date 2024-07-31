@@ -217,9 +217,9 @@ function ProfileHome() {
                             <div className='font-bold text-2xl'>
                                 <p>Hobbies</p>
                             </div>
-                            <div className=" flex space-x-4">
+                            <div className=" flex space-y-2 flex-col">
                                 {user.hobbies.map((hobbie, index) => (
-                                    <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{hobbie}</p>
+                                    <p key={index} className='bg-[#D9D9D9] max-w-64 flex-nowrap  px-4 py-1 rounded-full font-semibold'>{hobbie}</p>
                                 ))}
                             </div>
                         </div>
@@ -227,17 +227,17 @@ function ProfileHome() {
                             <div className='font-bold text-2xl'>
                                 <p>Passions</p>
                             </div>
-                            <div className="flex space-x-4 overflow-x-auto w-[90vw]">
+                            <div className="flex space-y-2 flex-col overflow-x-auto ">
                                 {/* Use overflow-x-auto to enable horizontal scrolling */}
                                 {user.passions.map((passion, index) => (
-                                    <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>
+                                    <p key={index} className='bg-[#D9D9D9] flex-wrap max-w-64 px-4 py-1 rounded-full font-semibold'>
                                         {passion}
                                     </p>
                                 ))}
                             </div>
                         </div>
                     </div>
-                    <div className='space-y-6'>
+                    <div className='space-y-6 pt-12'>
                         <div className='font-bold text-2xl'>
                             <p>Posts</p>
                         </div>

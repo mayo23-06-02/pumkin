@@ -35,14 +35,14 @@ function MainHeader() {
                 const selectedNotifications = data.filter(
                     (post) => post.email === email
                 );
-              
+
                 console.log(selectedNotifications);
                 if (selectedNotifications.length > 0) {
                     setUserNotifications(selectedNotifications);
                 }
             })
 
-            
+
     }, [])
 
     useEffect(() => {
@@ -54,7 +54,7 @@ function MainHeader() {
         }
     }, [userNotifications]);
 
-    console.log(unseenNotifications,"sila");
+    console.log(unseenNotifications, "sila");
 
 
     return (
@@ -85,30 +85,28 @@ function MainHeader() {
                 </span>
             </div>
             <div className='flex space-x-12 items-center'>
-                <div className="flex lg:w-72  lg:space-x-7 items-center ">
-                    <Link href={'../../feed'}>
+                <Link href={'../../feed'}>
+                    <div className="flex lg:w-72  lg:space-x-7 items-center ">
                         <Image src={Logo} width={50} height={50} className='hidden lg:inline' />
-                    </Link>
-                    <Link href={'../../feed'}>
                         <Image src={Pumpkin} width={100} height={80} className='lg:scale-150' />
-                    </Link>
-                </div>
+                    </div>
+                </Link>
                 <div className='hidden lg:inline'>
-                    <ul className='flex space-x-12 text-lg'>
-                        <li className='font-bold text-xl hover:scale-105 cursor-pointer'>
+                    <ul className='flex space-x-12 '>
+                        <li className='font-bold hover:scale-105 cursor-pointer'>
                             <Link href={'../../feed'}>
                                 <p>Home</p>
                             </Link>
                         </li>
-                        <li className='font-bold text-xl hover:scale-105 cursor-pointer'>
+                        <li className='font-bold  hover:scale-105 cursor-pointer'>
                             <Link href={'../../discover'}>
                                 <p>Discover</p>
                             </Link>
                         </li>
-                        <li className='font-bold text-xl hover:scale-105 cursor-pointer'>
-                        <Link href={'../../matches'}>
-                            <p>Matches</p>
-                        </Link>
+                        <li className='font-bold  hover:scale-105 cursor-pointer'>
+                            <Link href={'../../matches'}>
+                                <p>Matches</p>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -117,7 +115,7 @@ function MainHeader() {
             <div className=''>
                 <div className="flex  space-x-12 items-center "	>
                     <div className='flex items-center justify-center '>
-                        <div className='font-bold text-xl hidden lg:inline hover:scale-105 cursor-pointer'>
+                        <div className='font-bold  hidden lg:inline hover:scale-105 cursor-pointer'>
                             <Link href={'../../'}>
                                 <p className='whitespace-nowrap '>Log Out</p>
                             </Link>
@@ -126,15 +124,15 @@ function MainHeader() {
                     <div className='flex space-x-4 lg:space-x-6 items-center'>
                         <div className='relative cursor-pointer active:scale-105'>
                             <Link href={'../../../notifications'}>
-                                <BiBell className='lg:text-4xl text-2xl' />
+                                <BiBell className='lg:text-2xl text-2xl' />
                             </Link>
-                            <span className='absolute text-white lg:-right-2 right-0 font-semibold -top-2  bg-black lg:h-6 h-4 lg:w-6 w-4 text-xs lg:text-base flex items-center justify-center p-1 rounded-full'>
+                            <span className='absolute text-white lg:-right-1 right-0 font-semibold -top-2  bg-black lg:h-4 h-4 lg:w-4 w-4 text-xs  flex items-center justify-center p-1 rounded-full'>
                                 <p>{unseenNotifications.length}</p>
                             </span>
                         </div>
                         <div>
                             <Link href={'../../../profile'}>
-                                <BiUser className='lg:text-4xl text-2xl cursor-pointer active:scale-105' />
+                                <BiUser className='lg:text-2xl text-2xl cursor-pointer active:scale-105' />
                             </Link>
                         </div>
                     </div>

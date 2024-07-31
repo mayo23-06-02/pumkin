@@ -17,7 +17,7 @@ export default function Feed() {
       <span className='absolute z-50 w-full'>
         <MainHeader />
       </span>
-      <div className='max-w-[1280px] w-full space-y-6 py-16 lg:pt-0'>
+      <div className='max-w-[800px] w-full space-y-6 py-16 lg:pt-0'>
         <Slider />
         <YouMayKnowHome />
         <DiscoverBanner />

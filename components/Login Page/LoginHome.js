@@ -26,7 +26,6 @@ function LoginHome() {
             })
     }, [])
 
-    
 
     function handleSubmitThirdForm(e) {
         e.preventDefault();
@@ -70,7 +69,7 @@ function LoginHome() {
             </div>
             <span className='absolute z-50 bottom-0 rounded-t-full lg:top-[30vh] lg:left-[30%]'>
                 <div className=' lg:max-w-[100px] rounded-t-full'>
-                    <div className=" bg-white/5 rounded-3xl bg-opacity-20 py-8 lg:py-12  space-y-8 backdrop-blur-lg w-screen   col-span-6 flex-col  text-white flex  items-center px-12 lg:max-w-[500px]">
+                    <div className=" bg-white/5 rounded-3xl bg-opacity-20 py-8 lg:py-12  space-y-4 backdrop-blur-lg w-screen   col-span-6 flex-col  text-white flex  items-center px-6 lg:max-w-[500px]">
                         <div className='flex flex-col space-y-4 items-start w-full'>
                             <p className='lg:text-4xl text-2xl font-bold '>Sign Up</p>
                             <div className='text-red-600'>
@@ -83,7 +82,7 @@ function LoginHome() {
                             <TextInput type={'password'} label={'Password'} value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div>
-                            <div className='flex space-x-2'>
+                            <div className='flex space-x-2 text-sm'>
                                 <p>Don&apos;t have an account yet? </p>
                                 <Link href={'../../signup'}>
                                     <p className='font-bold text-blue-600 hover:underline active:scale-105 cursor-pointer'>Sign Up</p>

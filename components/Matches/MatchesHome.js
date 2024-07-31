@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ProfileCard from '../UI/Card/ProfileCard'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import ProfileCardMatches from '../UI/Card/ProfileCardMatches';
 
 function MatchesHome() {
     const [users, setUsers] = useState([])
@@ -35,8 +36,8 @@ function MatchesHome() {
         }
     };
     return (
-        <div className='max-w-[90vw]  px-6 pt-6 lg:p-0 lg:max-w-[600px]'>
-            <p className='text-3xl lg:text-2xl lg:py-12 py-8  font-bold text-white'>People You May Know</p>
+        <div className='max-w-[90vw]  px-6  lg:p-0 lg:max-w-[600px] '>
+            <p className='text-xl lg:text-2xl lg:py-8 py-4  font-bold text-white'>Matches</p>
             <div className=''>
                 <Carousel
                     swipeable={true}
@@ -44,11 +45,10 @@ function MatchesHome() {
                     showDots={false}
                     infinite={true}
                     responsive={responsive}
-                    removeArrowOnDeviceType={["tablet", "mobile"]}
                     className=''>
                     {users.map((user) => (
                         <div key={user._id} className='lg:mx-4 mx-2  '>\
-                            <ProfileCard
+                            <ProfileCardMatches
                                 id={user._id}
                                 image={user.profilePicture}
                                 username={user.username}

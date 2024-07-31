@@ -52,7 +52,7 @@ function WithSomeInterest() {
 
     return (
         <div className='max-w-[100vw]  px-6 pt-6 lg:p-0 lg:max-w-[1280px]'>
-            <p className='text-3xl lg:text-2xl lg:py-12 py-8  font-bold text-[#2C2A2A]'>People With Some Interest</p>
+            <p className='text-xl  lg:py-12 py-8  font-bold text-[#2C2A2A]'>People With Some Interest</p>
             <div className=''>
                 <Carousel
                     swipeable={true}
