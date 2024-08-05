@@ -1,7 +1,9 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../UI/Header/Header'
 import LandingPageMain from './LandingPageMain'
+import { usePathname, useSearchParams } from 'next/navigation'
+import Loader from '../UI/Loader'
 
 function LandingPage() {
 
@@ -342,6 +344,25 @@ function LandingPage() {
 
     // }, [])
 
+    const [loader, setLoader] = useState(false);
+
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+   
+    useEffect(() => {
+        setLoader(true);
+        const timer = setTimeout(() => setLoader(false), 1000);
+        return () => clearTimeout(timer);
+      }, [pathname, searchParams]);
+    
+      if (loader) {
+        return (
+          <div className="relative items-center justify-center flex h-full w-full">
+            <Loader />
+          </div>
+        );
+      }
+      
     return (
         <div className="flex w-full flex-col h-full">
 

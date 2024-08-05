@@ -1,13 +1,14 @@
 'use client'
 import Image from 'next/image'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import LPImage from '../../assets/images/LP-Image.png'
 import LPImageSM from '../../assets/images/BG - SM.jpg'
 import Button from '../UI/Button/Button'
 import TextInput from '../UI/Text Input/TextInput'
 import Link from 'next/link'
+import Loader from '../UI/Loader'
 
 function SignUpHome() {
     const router = useRouter();
@@ -17,11 +18,28 @@ function SignUpHome() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [verifyPassword, setVerifyPassword] = useState('');
+    const [loader, setLoader] = useState(false);
+
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+   
+    useEffect(() => {
+        setLoader(true);
+        const timer = setTimeout(() => setLoader(false), 1000);
+        return () => clearTimeout(timer);
+      }, [pathname, searchParams]);
+    
+      if (loader) {
+        return (
+          <div className="relative items-center justify-center flex h-full w-full">
+            <Loader />
+          </div>
+        );
+      }
 
     function handleSubmitThirdForm(e) {
         e.preventDefault();
         if (password === verifyPassword) {
-            nextSection()
             let res = fetch("/api/auth", {
                 method: "POST",
                 body: JSON.stringify({
@@ -53,7 +71,6 @@ function SignUpHome() {
         }
     }
 
-
     return (
         <div className="relative items-center justify-center flex h-full w-full">
             <div className="lg:grid grid-cols-12 items-center">
@@ -76,11 +93,11 @@ function SignUpHome() {
             </div>
             <span className='absolute z-50 bottom-0 rounded-t-full lg:top-[15vh] lg:left-[30%]'>
                 <div className=' lg:max-w-[100px] rounded-t-full'>
-                    <div className=" bg-white/5 rounded-3xl bg-opacity-20 py-8 lg:py-12 space-y-8 backdrop-blur-lg w-screen   col-span-6 flex-col  text-white flex  items-center px-12 lg:max-w-[500px]">
+                    <div className=" bg-white/5 rounded-3xl bg-opacity-20 py-8 lg:py-12 space-y-6 backdrop-blur-lg w-screen   col-span-6 flex-col  text-white flex  items-center px-6 lg:max-w-[500px]">
                         <div className='flex items-start w-full'>
-                            <p className='text-4xl font-bold '>Create Account</p>
+                            <p className='text-2xl font-bold '>Create Account</p>
                         </div>
-                        <div className='w-full space-y-6 '>
+                        <div className='w-full space-y-4 '>
                             <TextInput label={'First Name'} value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                             <TextInput label={'Last Name'} value={lastName} onChange={(e) => setLastName(e.target.value)} />
                             <TextInput label={'Email'} value={email} onChange={(e) => setEmail(e.target.value)} />

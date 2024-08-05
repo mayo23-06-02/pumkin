@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import LPImage from '../../assets/images/LP-Image.png'
 import LPImageSM from '../../assets/images/BG - SM.jpg'
@@ -9,6 +9,7 @@ import Button from '../UI/Button/Button'
 import TextInput from '../UI/Text Input/TextInput'
 import { setCookie } from 'cookies-next'
 import Link from 'next/link'
+import Loader from '../UI/Loader'
 
 function LoginHome() {
     const [email, setEmail] = useState('')
@@ -17,6 +18,16 @@ function LoginHome() {
     const [users, setUsers] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
     const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
+    const [loader, setLoader] = useState(false);
+
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        setLoader(true);
+        const timer = setTimeout(() => setLoader(false), 1000);
+        return () => clearTimeout(timer);
+    }, [pathname, searchParams]);
 
     useEffect(() => {
         fetch('/api/auth')
@@ -25,6 +36,14 @@ function LoginHome() {
                 setUsers(data)
             })
     }, [])
+
+    if (loader) {
+        return (
+            <div className="relative items-center justify-center flex h-full w-full">
+                <Loader />
+            </div>
+        );
+    }
 
 
     function handleSubmitThirdForm(e) {

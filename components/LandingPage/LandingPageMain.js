@@ -35,7 +35,7 @@ function LandingPageMain() {
             <span className='absolute z-50 top-[30vh]'>
                 <div className='lg:hidden'>
                     <div className="  col-span-6 flex-col space-y-3 text-white flex  items-center px-4 ">
-                        <div className="text-white flex justify-center flex-col items-center font-bold space-y-2 text-5xl">
+                        <div className="text-white flex justify-center flex-col items-center font-bold space-y-0 text-4xl">
                             <p>Welcome</p>
                             <p>To Pumpkin</p>
                         </div>

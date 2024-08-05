@@ -1,15 +1,36 @@
+'use client'
 import FeedPosts from "@/components/Feed/FeedPosts";
 import Slider from "@/components/Feed/Slider";
 import LoginHome from "@/components/Login Page/LoginHome";
 import DiscoverBanner from "@/components/UI/Banners/Discover";
 import Header from "@/components/UI/Header/Header";
 import MainHeader from "@/components/UI/Header/MainHeader";
+import Loader from "@/components/UI/Loader";
 import WithSomeIntrest from "@/components/WithSameIntrest/WithSomeIntrest";
 import YouMayKnowHome from "@/components/YouMayKnow/YouMayKnowHome";
 import Image from "next/image";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BiCopyright } from 'react-icons/bi'
 
 export default function Feed() {
+  const [loader, setLoader] = useState(false);
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+ 
+  useEffect(() => {
+      setLoader(true);
+      const timer = setTimeout(() => setLoader(false), 1000);
+      return () => clearTimeout(timer);
+    }, [pathname, searchParams]);
+  
+    if (loader) {
+      return (
+        <div className="relative items-center justify-center flex h-screen w-full">
+          <Loader />
+        </div>
+      );
+    }
   return (
     <main className=" flex justify-center h-screen w-full overflow-auto
     bg-gradient-to-l from-[#EFEFEF]  to-[#EFEFEF]
