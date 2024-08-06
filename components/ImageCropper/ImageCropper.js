@@ -85,6 +85,7 @@ const ImageCropper = () => {
 
     const handleSave = () => {
         uploadPost();
+        router.refresh()
         setIsSaved(true);
 
     };

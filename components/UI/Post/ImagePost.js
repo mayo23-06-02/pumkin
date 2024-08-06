@@ -52,7 +52,7 @@ function UserPost({surname, profilePicture, email, username, image, caption, _id
             <Image src={profilePicture} width={50} height={50} className='rounded-full' />
           </div>
           <div className=''>
-            <div className='flex lg:text-2xl text-xl space-x-2 font-bold'>
+            <div className='flex lg:text-xl text-lg space-x-2 font-bold'>
               <p>{username}</p>
               <p>{surname}</p>
             </div>

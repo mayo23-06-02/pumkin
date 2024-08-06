@@ -8,6 +8,7 @@ import { useCookies } from 'next-client-cookies'
 import ImageInput from '../UI/ImageInput/ImageInput'
 import { BiImageAdd, BiPlus, BiUserPlus } from 'react-icons/bi'
 import ImageCropper from '../ImageCropper/ImageCropper'
+import Loader from '../UI/Loader'
 
 
 function ProfileHome() {
@@ -136,11 +137,11 @@ function ProfileHome() {
 
     if (user) {
         return (
-            <div className=' relative bg-gradient-to-b space-y-12 from-black/5 to-white/0 lg:py-20 py-2 px-8 lg:px-16'>
-                <span className={`absolute z-50 lg:left-[25%] left-10 top-15   ${showCropper ? "block" : "hidden"}`}>
-                    <div className='relative flex-1'>
+            <div className=' relative bg-gradient-to-b space-y-6 from-black/5 to-white/0 lg:py-16 py-2 px-6 lg:px-16'>
+                <span className={`absolute z-50 lg:left-[25%]  top-15   ${showCropper ? "block" : "hidden"}`}>
+                    <div className='relative flex-1 px-4'>
                         <div className='absolute'>
-                            <BiPlus />
+                            <BiPlus className='rotate-45' />
                         </div>
                         <ImageCropper />
                     </div>
@@ -148,7 +149,7 @@ function ProfileHome() {
                 <div className='flex flex-col lg:flex-row items-center lg:space-y-0 space-y-6 lg:space-x-12'>
                     <div className='relative'>
                         {user.profilePicture ?
-                            <Image src={user.profilePicture} width={150} height={150} className='rounded-full' alt='profile' />
+                            <Image src={user.profilePicture} width={100} height={100} className='rounded-full' alt='profile' />
                             : <div onClick={() => setShowCropper(true)} className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
                                 <BiImageAdd className='text-5xl cursor-pointer active:scale-105' />
                             </div>
@@ -156,7 +157,7 @@ function ProfileHome() {
 
                     </div>
                     <div className='flex flex-col items-center lg:items-start space-y-2'>
-                        <div className='flex font-bold text-3xl space-x-2 lg:space-x-4 lg:text-5xl'>
+                        <div className='flex font-bold text-xl space-x-2 lg:space-x-4 lg:text-4xl'>
                             <p className=''>{user.name}</p>
                             <p className=''>{user.surname}</p>
                             {user.dob ?
@@ -165,34 +166,35 @@ function ProfileHome() {
                                 <p></p>
                             }
                         </div>
-                        {user.dob ?
-                            <div className='flex flex-col  lg:text-2xl text-lg space-y-2 '>
-                                <p className='text-gray-600'>@{user.username}</p>
+
+                        <div className='flex flex-col lg:flex-row lg:space-y-0 space-x-0 lg: lg:space-x-2 items-center justify-center  text-base  '>
+                            <p className='text-gray-600'>@{user.username}</p>
+                            {user.dob ?
                                 <p>Born {formatDate(user.dob)}</p>
-                            </div>
-                            :
-                            <p ></p>
-                        }
+                                :
+                                <p ></p>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className='flex space-y-16 lg:space-y-0  flex-col lg:flex-row items-center lg:justify-between w-full'>
-                    <div className='flex items-center space-x-6'>
-                        <div className='flex  space-x-2 lg:text-2xl text-xl'>
+                    <div className='flex items-center space-x-4'>
+                        <div className='flex  space-x-2 '>
                             <p className='font-bold'>{user.posts.length}</p>
                             <p>Posts</p>
                         </div>
-                        <div className='flex  space-x-2 lg:text-2xl text-xl'>
+                        <div className='flex  space-x-2 '>
                             <p className='font-bold'>{user.pumpkins ? user.pumpkins : 0}</p>
                             <p>Pumkins</p>
                         </div>
-                        <div className='flex  space-x-2 lg:text-2xl text-xl'>
+                        <div className='flex  space-x-2 '>
                             <p className='font-bold'>{user.hickies ? user.hickies : 0}</p>
                             <p>Hickies</p>
                         </div>
                     </div>
 
-                    <div className='flex lg:space-x-16 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-12 flex-col lg:space-y-0 '>
-                        <p className='hover:scale-105 cursor-pointer' onClick={() => setSetshowEditBox(true)}>Edit Profile</p>
+                    <div className='flex lg:space-x-16 font-bold lg:flex-row text-lg  items-center space-y-6 flex-col lg:space-y-0 '>
+                        <p className='hover:scale-105 cursor-pointer active:bg-gray-200' onClick={() => setSetshowEditBox(true)}>Edit Profile</p>
                         <div>
                             <Button label={"Post"} variant={"primary"} onClick={() => {
                                 router.push('../../post')
@@ -204,30 +206,30 @@ function ProfileHome() {
                 <div className=' grid grid-rows-2 lg:grid-cols-2 lg:grid-flow-row grid-flow-col'>
                     <div className='space-y-12'>
                         <div className='space-y-4'>
-                            <div className='font-bold text-2xl'>
+                            <div className='font-bold text-xl'>
                                 <p>Bio</p>
                             </div>
-                            <div className=' max-w-[400px] text-xl'>
+                            <div className=' max-w-[400px] lg:text-lg'>
                                 <p>
                                     {user.bio}
                                 </p>
                             </div>
                         </div>
                         <div className='space-y-4'>
-                            <div className='font-bold text-2xl'>
+                            <div className='font-bold text-xl'>
                                 <p>Hobbies</p>
                             </div>
-                            <div className=" flex space-y-2 flex-col">
+                            <div className=" flex space-x-2">
                                 {user.hobbies.map((hobbie, index) => (
                                     <p key={index} className='bg-[#D9D9D9] max-w-64 flex-nowrap  px-4 py-1 rounded-full font-semibold'>{hobbie}</p>
                                 ))}
                             </div>
                         </div>
                         <div className='space-y-4'>
-                            <div className='font-bold text-2xl'>
+                            <div className='font-bold text-xl'>
                                 <p>Passions</p>
                             </div>
-                            <div className="flex space-y-2 flex-col overflow-x-auto ">
+                            <div className="flex space-x-2 ">
                                 {/* Use overflow-x-auto to enable horizontal scrolling */}
                                 {user.passions.map((passion, index) => (
                                     <p key={index} className='bg-[#D9D9D9] flex-wrap max-w-64 px-4 py-1 rounded-full font-semibold'>
@@ -249,48 +251,50 @@ function ProfileHome() {
                         </div>
                     </div>
                 </div>
-                <span className={`absolute z-50  lg:w-[50vw] w-[90vw] bg-white py-12 px-8 top-[20%] lg:right-[15%]  ${setshowEditBox ? 'block' : 'hidden'} `}>
-                    <div className='flex justify-between py-6'>
-                        <p className='font-bold text-2xl'>Edit Profile</p>
-                        <BiPlus onClick={() => setSetshowEditBox(false)} className='rotate-45 text-3xl cursor-pointer' />
-                    </div>
-                    <div className='space-y-8'>
-                        <div className='space-y-6'>
-                            <div>
-                                <div className='flex space-x-2'>
-                                    <input type='date' value={DOB} onChange={(e) => setDOB(e.target.value)} placeholder='Add/Edit Date of Birth' className='w-full outline outline-1 outline-gray-300 p-2' />
-                                    <button className='bg-blue-500 text-white px-4 py-1 rounded-full font-semibold' onClick={(e) => setDOB(e.target.value)}>Add</button>
-                                </div>
-                            </div>
-                            <textarea value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Add/Edit Bio' className='w-full min-h-24 outline outline-1 outline-gray-300 p-2' />
-                            <div>
-                                <div className=" flex space-x-2 pb-2">
-                                    {hobbies.map((hobby, index) => (
-                                        <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{hobby}</p>
-                                    ))}
-                                </div>
-                                <div className='flex space-x-2'>
-                                    <input value={hobby} onChange={(e) => setHobby(e.target.value)} placeholder='Add/Edit Hobbies' className='w-full outline outline-1 outline-gray-300 p-2' />
-                                    <button className='bg-blue-500 text-white px-4 py-1 rounded-full font-semibold' onClick={() => setHobbies([...hobbies, hobby])}>Add</button>
-                                </div>
-                            </div>
-                            <div>
-                                <div className=" flex space-x-2 pb-2">
-                                    {passions.map((passion, index) => (
-                                        <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{passion}</p>
-                                    ))}
-                                </div>
-                                <div className='flex space-x-4'>
-                                    <input value={passion} onChange={(e) => setPassion(e.target.value)} placeholder='Add/Edit Passions' className='w-full outline outline-1 outline-gray-300 p-2' />
-                                    <button className='bg-blue-500 text-white px-4 py-1 rounded-full font-semibold' onClick={() => {
-                                        setPassions([...passions, passion]
-
-                                        )
-                                    }}>Add</button>
-                                </div>
-                            </div>
+                <span  className={`fixed z-20  h-screen flex  bg-black/10 py-12 items-center justify-center px-4 top-0 left-0 w-full  ${setshowEditBox ? 'block' : 'hidden'} `}>
+                    <div className={`    bg-white py-6 lg:py-12 px-4 lg:px-8 rounded-xl   lg:w-6/12 w-full  `}>
+                        <div className='flex justify-between py-6'>
+                            <p className='font-bold text-2xl'>Edit Profile</p>
+                            <BiPlus onClick={() => setSetshowEditBox(false)} className='rotate-45 text-3xl cursor-pointer' />
                         </div>
-                        <Button label={"Save"} variant={"primary"} onClick={handleSubmit} />
+                        <div className='space-y-8'>
+                            <div className='space-y-6'>
+                                <div>
+                                    <div className='flex space-x-2'>
+                                        <input type='date' value={DOB} onChange={(e) => setDOB(e.target.value)} placeholder='Add/Edit Date of Birth' className='w-full outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                        <button className='bg-blue-500 text-white px-4 py-1 rounded-full font-semibold' onClick={(e) => setDOB(e.target.value)}>Add</button>
+                                    </div>
+                                </div>
+                                <textarea value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Add/Edit Bio' className='w-full min-h-24 outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                <div>
+                                    <div className=" flex space-x-2 pb-2">
+                                        {hobbies.map((hobby, index) => (
+                                            <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{hobby}</p>
+                                        ))}
+                                    </div>
+                                    <div className='flex space-x-2'>
+                                        <input value={hobby} onChange={(e) => setHobby(e.target.value)} placeholder='Add/Edit Hobbies' className='w-full outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                        <button className='bg-blue-500 text-white px-4 py-1 rounded-full font-semibold' onClick={() => setHobbies([...hobbies, hobby])}>Add</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className=" flex space-x-2 pb-2">
+                                        {passions.map((passion, index) => (
+                                            <p key={index} className='bg-[#D9D9D9] flex-wrap px-4 py-1 rounded-full font-semibold'>{passion}</p>
+                                        ))}
+                                    </div>
+                                    <div className='flex space-x-4'>
+                                        <input value={passion} onChange={(e) => setPassion(e.target.value)} placeholder='Add/Edit Passions' className='w-full outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                        <button className='bg-blue-500 text-white px-4 py-1 rounded-full font-semibold' onClick={() => {
+                                            setPassions([...passions, passion]
+
+                                            )
+                                        }}>Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <Button label={"Save"} variant={"primary"} onClick={handleSubmit} />
+                        </div>
                     </div>
                 </span>
 
@@ -298,7 +302,7 @@ function ProfileHome() {
             </div>
         )
     } else {
-        return <div className='w-full flex items-center justify-center h-96 text-xl'>Loading...</div>
+        return <div className='w-full flex items-center justify-center h-96 text-xl'><Loader /></div>
     }
 }
 

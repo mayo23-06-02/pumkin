@@ -12,7 +12,7 @@ export async function PUT(req) {
   const passions = body.passions;
   const dob = body.dob;
 
-  console.log(email, bio, hobbies, passions, DOB);
+  console.log(email, bio, hobbies, passions, dob);
 
   try {
     const user = await db.collection("Users").findOne({ email });

@@ -8,6 +8,7 @@ import { useCookies } from 'next-client-cookies'
 import ImageInput from '../UI/ImageInput/ImageInput'
 import TextInput from '../UI/Text Input/TextInput'
 import { BiImageAdd, BiPlus, BiUser } from 'react-icons/bi'
+import Loader from '../UI/Loader'
 
 
 function UserProfileHome() {
@@ -22,6 +23,8 @@ function UserProfileHome() {
     const [setspecialName, setSetspecialName] = useState("")
     const [message, setMessage] = useState("")
     const [hint, setHint] = useState("")
+    const [userPosts, setUserPosts] = useState([])
+
 
     function toggleShooter() {
         setShowShooter(!showShooter)
@@ -42,6 +45,21 @@ function UserProfileHome() {
                 );
                 setUserSelectedUserData(selectedUser)
             })
+
+        fetch('/api/post-image')
+            .then((res) => res.json())
+            .then((data) => {
+                const selectedPosts = data.filter(
+                    (post) => post.email === selectedUserData.email
+                );
+                console.log(selectedPosts);
+                if (selectedPosts.length > 0) {
+                    setUserPosts(selectedPosts);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching post data:", error);
+            });
     }, [cookies])
 
     function formatDate(dateString) {
@@ -118,47 +136,50 @@ function UserProfileHome() {
 
     if (selectedUserData) {
         return (
-            <div className=' relative bg-gradient-to-b space-y-12 from-black/5 to-white/0 lg:py-20 py-6 px-8 lg:px-16'>
+            <div className=' relative bg-gradient-to-b space-y-6 from-black/5 to-white/0 lg:py-16 py-6 px-8 lg:px-16'>
                 <div className={`${showShooter ? 'hidden' : 'block'}`}>
                     {isShooter ?
-                        <div className='fixed text-white     flex flex-col py-16 px-6 l space-y-10  items-center lg:left-[35%] lg:w-[30vw] w-[88vw]  bg-[#FF7518] rounded-3xl'>
-
-                            <div className=' flex flex-col items-center text-lg font-semibold'>
-                                <p>Heey, {selectedUserData.name}</p>
-                                <p>Welcome to Pumpkins Shot Shooter</p>
-                            </div>
-                            <div className='text-justify'>
-                                <p>Shot Shooter lets you hit your crush up without having to go through the gwaabs, aka - gwababa, coz weve got you. This happens anonymously, and they never get to know its you. Take the chance, send them a sweet text. </p>
-                            </div>
-                            <div className='flex flex-col items-center space-y-2'>
-                                <button onClick={toggleIsShooter} className='bg-black px-24 text-white rounded-full font-bold py-4'>
-                                    <p>Shoot</p>
-                                </button>
-                                <p className='hover:underline cursor-pointer' onClick={toggleShooter}>Cancel</p>
+                        <div className='fixed text-white bg-black/20 h-screen justify-center  w-screen flex flex-col py-16 px-6 l space-y-10  items-center left-0 top-0    rounded-3xl'>
+                            <div className=' text-white     flex flex-col lg:py-16 py-8 px-6 l space-y-10  items-center max-w-[88vw] lg:max-w-[40vw]   bg-[#FF7518] rounded-3xl'>
+                                <div className=' flex flex-col items-center text-lg font-semibold'>
+                                    <p>Heey, {selectedUserData.name}</p>
+                                    <p className='text-center'>Welcome to Pumpkins Shot Shooter</p>
+                                </div>
+                                <div className='text-justify'>
+                                    <p>Shot Shooter lets you hit your crush up without having to go through the gwaabs, aka - gwababa, coz weve got you. This happens anonymously, and they never get to know its you. Take the chance, send them a sweet text. </p>
+                                </div>
+                                <div className='flex flex-col items-center space-y-2'>
+                                    <button onClick={toggleIsShooter} className='bg-black px-24 text-white rounded-full font-bold py-4'>
+                                        <p>Shoot</p>
+                                    </button>
+                                    <p className='hover:underline cursor-pointer' onClick={toggleShooter}>Cancel</p>
+                                </div>
                             </div>
                         </div>
                         :
-                        <div className='fixed text-white     flex flex-col py-16 px-6 l space-y-6  items-center lg:left-[35%] lg:w-[30vw] w-[88vw]  bg-[#FF7518] rounded-3xl'>
-                            <div className='w-full space-y-2'>
-                                <p className='text-sm'>What special name no you want them to know you by?</p>
-                                <input type="text" className='w-full py-2 px-4 rounded-xl text-black' value={setspecialName} onChange={(e) => setSetspecialName(e.target.value)} />
-                            </div>
-                            <div className='w-full space-y-2'>
-                                <p className='text-sm'>Shoot your shot player, Whats your message to them?</p>
-                                <textarea type="text" className='w-full py-2 px-4 rounded-xl text-black' value={message} onChange={(e) => setMessage(e.target.value)} />
-                            </div>
-                            <div className='w-full space-y-2'>
-                                <p className='text-sm'>Wanna drop a young hint, dont be too obvious now!</p>
-                                <input type="text" className='w-full py-2 px-4 rounded-xl text-black' value={hint} onChange={(e) => setHint(e.target.value)} />
-                            </div>
-                            <div className='flex flex-col items-center space-y-2'>
-                                <button onClick={handleSubmit} className='bg-black px-24 text-white rounded-full font-bold py-4'>
-                                    <p>Shoot</p>
-                                </button>
-                                <p className='hover:underline cursor-pointer' onClick={() => {
-                                    toggleShooter()
-                                    toggleIsShooter()
-                                }}>Cancel</p>
+                        <div className='fixed text-white bg-black/20 h-screen justify-center  w-screen flex flex-col py-16 px-6 l space-y-10  items-center left-0 top-0    rounded-3xl'>
+                            <div className=' text-white     flex flex-col lg:py-16 py-8 px-6 l space-y-10  items-center max-w-[88vw] lg:max-w-[40vw]   bg-[#FF7518] rounded-3xl'>
+                                <div className='w-full space-y-2'>
+                                    <p className='text-sm'>What special name no you want them to know you by?</p>
+                                    <input type="text" className='w-full py-2 px-4 rounded-xl text-black' value={setspecialName} onChange={(e) => setSetspecialName(e.target.value)} />
+                                </div>
+                                <div className='w-full space-y-2'>
+                                    <p className='text-sm'>Shoot your shot player, Whats your message to them?</p>
+                                    <textarea type="text" className='w-full py-2 px-4 rounded-xl text-black' value={message} onChange={(e) => setMessage(e.target.value)} />
+                                </div>
+                                <div className='w-full space-y-2'>
+                                    <p className='text-sm'>Wanna drop a young hint, dont be too obvious now!</p>
+                                    <input type="text" className='w-full py-2 px-4 rounded-xl text-black' value={hint} onChange={(e) => setHint(e.target.value)} />
+                                </div>
+                                <div className='flex flex-col items-center space-y-2'>
+                                    <button onClick={handleSubmit} className='bg-black px-24 text-white rounded-full font-bold py-4'>
+                                        <p>Shoot</p>
+                                    </button>
+                                    <p className='hover:underline cursor-pointer' onClick={() => {
+                                        toggleShooter()
+                                        toggleIsShooter()
+                                    }}>Cancel</p>
+                                </div>
                             </div>
                         </div>
                     }
@@ -167,34 +188,34 @@ function UserProfileHome() {
                     <div>
                         {selectedUserData.profilePicture ?
                             <Image src={selectedUserData.profilePicture} width={150} height={150} className='rounded-full' alt='profile' />
-                            : <div  className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
+                            : <div className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
                                 <BiUser className='text-5xl cursor-pointer active:scale-105' />
                             </div>
                         }
                     </div>
                     <div className='flex flex-col items-center lg:items-start space-y-2'>
-                        <div className='flex font-bold text-3xl space-x-2 lg:space-x-4 lg:text-5xl'>
+                        <div className='flex font-bold text-xl space-x-2 lg:space-x-4 lg:text-4xl'>
                             <p className=''>{selectedUserData.name}</p>
                             <p className=''>{selectedUserData.surname},</p>
                             <p>{calculateAge(selectedUserData.dob)}</p>
                         </div>
-                        <div className='flex flex-col  lg:text-2xl text-lg space-y-2 '>
+                        <div className='flex flex-col lg:flex-row lg:space-y-0 space-x-0 lg: lg:space-x-2 items-center justify-center  text-base  '>
                             <p className='text-gray-600'>@{selectedUserData.username}</p>
-                            <p>Born {formatDate(selectedUserData.dob)}</p>
+                            {selectedUserData.dob ? <p className='text-gray-600'>{selectedUserData.dob}</p> : null}
                         </div>
                     </div>
                 </div>
                 <div className='flex space-y-16 lg:space-y-0  flex-col lg:flex-row items-center lg:justify-between w-full'>
                     <div className='flex items-center space-x-6'>
-                        <div className='flex  space-x-2 lg:text-2xl text-xl'>
+                        <div className='flex  space-x-2 lg:text-2xl '>
                             <p className='font-bold'>{selectedUserData.posts.length}</p>
                             <p>Posts</p>
                         </div>
-                        <div className='flex  space-x-2 lg:text-2xl text-xl'>
+                        <div className='flex  space-x-2 lg:text-2xl '>
                             <p className='font-bold'>{selectedUserData.pumpkins}</p>
                             <p>Pumkins</p>
                         </div>
-                        <div className='flex  space-x-2 lg:text-2xl text-xl'>
+                        <div className='flex  space-x-2 lg:text-2xl '>
                             <p className='font-bold'>{selectedUserData.hickies}</p>
                             <p>Hickies</p>
                         </div>
@@ -213,17 +234,17 @@ function UserProfileHome() {
                 <div className=' grid grid-rows-2 lg:grid-cols-2 lg:grid-flow-row grid-flow-col'>
                     <div className='space-y-12'>
                         <div className='space-y-4'>
-                            <div className='font-bold text-2xl'>
+                            <div className='font-bold text-xl'>
                                 <p>Bio</p>
                             </div>
-                            <div className=' max-w-[400px] text-xl'>
+                            <div className=' max-w-[400px] lg:text-xl'>
                                 <p>
                                     {selectedUserData.bio}
                                 </p>
                             </div>
                         </div>
                         <div className='space-y-4'>
-                            <div className='font-bold text-2xl'>
+                            <div className='font-bold text-xl'>
                                 <p>Hobbies</p>
                             </div>
                             <div className="flex space-x-2 max-w-[90vw] overflow-auto py-2">
@@ -235,7 +256,7 @@ function UserProfileHome() {
                             </div>
                         </div>
                         <div className='space-y-4'>
-                            <div className='font-bold text-2xl'>
+                            <div className='font-bold text-xl'>
                                 <p>Passions</p>
                             </div>
                             <div className=" flex space-x-2 sm:w-[90vw] overflow-auto  py-2">
@@ -248,13 +269,13 @@ function UserProfileHome() {
                         </div>
                     </div>
                     <div className='space-y-6 pt-6 lg:pt-0'>
-                        <div className='font-bold text-2xl'>
+                        <div className='font-bold text-xl'>
                             <p>Posts</p>
                         </div>
                         <div className='grid grid-cols-3 gap-3'>
 
-                            {selectedUserData.posts.map((post, index) => (
-                                <Image key={index} src={post.image} width={400} height={200} className='object-contain' />
+                            {userPosts.map((post, index) => (
+                                <Image key={index} id={post._id} src={post.imagePost} width={200} height={200} className='object-contain' alt='profile' />
                             ))
                             }
                         </div>
@@ -263,7 +284,7 @@ function UserProfileHome() {
             </div>
         )
     } else {
-        return <div className='w-full flex items-center justify-center h-96 text-xl'>Loading...</div>
+        return <div className='w-full flex items-center justify-center h-96 text-xl'><Loader /></div>
     }
 }
 

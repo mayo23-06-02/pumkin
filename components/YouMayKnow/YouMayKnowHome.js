@@ -61,7 +61,7 @@ function YouMayKnowHome() {
                     showDots={false}
                     infinite={true}
                     responsive={responsive}
-                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                   
                     className=''>
                     {users.map((user) => (
                         <div key={user._id}>

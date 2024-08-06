@@ -48,7 +48,7 @@ function LoginHome() {
 
     function handleSubmitThirdForm(e) {
         e.preventDefault();
-
+        setLoader(true)
         const selectedUser = users.find(
             (user) => user.email === email
         );
@@ -57,11 +57,17 @@ function LoginHome() {
 
         if (!selectedUser) {
             setErrorMessage('Account not found. Please try again')
+            setLoader(false)
         } else {
             if (selectedUser.password === password) {
-                router.push('../../feed')
+                if (!selectedUser.profilePicture) {
+                    router.push('../../profile')
+                } else {
+                    router.push('../../feed')
+                }
             } else {
                 setPasswordErrorMessage("Incorrect Email/Password!")
+                setLoader(false)
             }
         }
     }
@@ -109,7 +115,7 @@ function LoginHome() {
                             </div>
                         </div>
                         <div>
-                            <Button label="Login" variant={"primary"} onClick={handleSubmitThirdForm} />
+                            <Button loader={loader} label="Login" variant={"primary"} onClick={handleSubmitThirdForm} />
                         </div>
                     </div>
                 </div>

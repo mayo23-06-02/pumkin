@@ -4,7 +4,7 @@ import LoaderGif from '../../assets/images/Loader.svg'
 export default function Loader() {
   return (
     <div>
-        <Image src={LoaderGif} alt="loader" width={50} height={50} />
+        <Image src={LoaderGif} alt="loader" width={36} height={36} />
     </div>
   )
 }

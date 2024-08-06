@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import Loader from '../../../assets/images/loader.gif';
-import Image from 'next/image';
+import Loader from '../Loader';
 
 const Button = ({
   label,
@@ -9,8 +8,11 @@ const Button = ({
   variant,
   disabled = false,
   className = '',
+  loader
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(loader);
+
+
 
   const getButtonStyles = () => {
     switch (variant) {
@@ -25,29 +27,22 @@ const Button = ({
     }
   };
 
-  const handleClick = async () => {
-    setIsLoading(true);
-    try {
-      if (onClick) {
-        await onClick(event);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <button
-      onClick={handleClick}
+      onClick={(e) => {
+        setIsLoading(true);
+        onClick(e);
+      }}
       disabled={disabled || isLoading}
-      className={`py-4 lg:py-3 flex-nowrap justify-center flex min-w-48 lg:min-w-48 w-full font-bold rounded-full text-sm lg:text- transition-colors duration-300 ${getButtonStyles()} ${className}`}
+      className={`h-12 lg:py-3 flex-nowrap items-center justify-center flex min-w-48 lg:min-w-48 w-full font-bold rounded-full text-sm lg:text- transition-colors duration-300 ${getButtonStyles()} ${className}`}
     >
       {isLoading ? (
-        <Image src={Loader} alt="Loading..." className="h-6 w-6 mr-2" width={24} height={24} />
+        <Loader />
       ) : (
         label
       )}
     </button>
+
   );
 };
 
