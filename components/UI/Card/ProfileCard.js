@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Button from '../Button/Button';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
-import { BiImageAdd } from 'react-icons/bi';
+import { BiImageAdd, BiUser } from 'react-icons/bi';
 
 function ProfileCard({ id, username, email, name, image, surname = '', hickies, pumpkins, dob }) {
     function getSurnameInitials(surname) {
@@ -39,12 +39,12 @@ function ProfileCard({ id, username, email, name, image, surname = '', hickies, 
             router.push(`../../user-profile`)
         }}>
             {image ?
-                <div>
+                <div className='lg:h-[150px] lg:w-[150px] h-[100px] w-[100px] items-center justify-center flex'>
                     <Image src={image} width={150} height={150} className='rounded-full hidden lg:inline' alt='profile' />
                     <Image src={image} width={100} height={100} className='rounded-full lg:hidden' alt='profile' />
                 </div>
                 : <div className='bg-gray-300 flex items-center justify-center  h-[100px] w-[100px] lg:h-[150px] lg:w-[150px] rounded-full p-6'>
-                    <BiImageAdd className='lg:text-5xl text-3xl  active:scale-105' />
+                    <BiUser className='lg:text-5xl text-3xl  active:scale-105' />
                 </div>
             }
             <span className='  bottom-0    rounded-b-[12px] px-2 lg:px-6'>

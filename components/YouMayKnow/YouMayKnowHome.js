@@ -16,10 +16,10 @@ function YouMayKnowHome() {
 
 
     useEffect(() => {
-        const userData = cookies.get('userData')
-        if (userData) {
-            setUser(JSON.parse(userData))
-        }
+        // const userData = cookies.get('userData')
+        // if (userData) {
+        //     setUser(JSON.parse(userData))
+        // }
         fetch('/api/auth')
             .then((res) => res.json())
             .then((data) => {
@@ -61,7 +61,6 @@ function YouMayKnowHome() {
                     showDots={false}
                     infinite={true}
                     responsive={responsive}
-                   
                     className=''>
                     {users.map((user) => (
                         <div key={user._id}>

@@ -17,7 +17,7 @@ export default function Discover() {
           <span className='flex z-50 w-screen'>
             <MainHeader />
           </span>
-          <div className='max-w-[1280px] w-full '>
+          <div className='max-w-[900px] w-full '>
             <SearchBar />
             <YouMayKnowHome />
           </div>

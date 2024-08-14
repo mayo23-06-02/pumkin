@@ -67,7 +67,7 @@ export default function SearchBar() {
   return (
     <div>
       <div className='flex w-full flex-col space-y-8 py-12 lg:py-24 lg:px-6 px-4 lg:items-center'>
-        <p className='font-extrabold text-2xl lg:text-7xl px-'>Discover Potential Dates</p>
+        <p className='font-extrabold text-2xl lg:text-5xl lg:pb-6'>Discover Potential Dates</p>
         <div className='space-x-4 relative flex items-center'>
           <input
             placeholder='Search people...'
