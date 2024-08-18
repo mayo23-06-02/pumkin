@@ -33,7 +33,7 @@ export default function Feed() {
     }
   return (
     <main className=" flex justify-center h-screen w-full overflow-auto
-    bg-gradient-to-l from-[#EFEFEF]  to-[#EFEFEF]
+    bg-gradient-to-l from-[#FFFFFF]  to-[#FFFFFF]
      z-[-1]">
       <span className='absolute z-50 w-full'>
         <MainHeader />

@@ -75,6 +75,7 @@ export default function ImageInput() {
                 "comments": [],
                 "likes": 0,
                 "created": timestamp,
+                "likedUsers": [],
             }),
         })
         .then(async (response) => {

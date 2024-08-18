@@ -9,7 +9,7 @@ function DiscoverBanner() {
     const router = useRouter()
     return (
         <div className=' relative bg-gradient-to-b from-[#C3530A] flex flex-col space-y-6  to-[#8E2842]'>
-            <div className='px-8 relative py-10 bg-gradient-to-b from-[#C3530A] flex flex-col space-y-6 to-[#8E2842]' style={{ backgroundImage: `url(${Pattern.src})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className='px-8 relative py-10 bg-gradient-to-b from-[#C3530A] flex flex-col space-y-6 to-[#8E2842]' style={{ backgroundImage: `url(${Pattern.src})`, backgroundSize: 'cover', backgroundPosition: 'center',  }}>
                 <div>
                     <div className='text-white font-bold lg:text-6xl text-4xl'>
                         <p>Discover</p>

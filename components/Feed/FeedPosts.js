@@ -56,6 +56,8 @@ function FeedPosts() {
             email={post.email}
             caption={post.caption}
             image={post.imagePost}
+            likes={post.likes}
+            likedUsersData={post.likedUsers}
             profilePicture={post.profilePicture} // Assuming UserPost component can handle this prop
           />
         </div>
