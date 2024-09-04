@@ -45,15 +45,15 @@ function YouMayKnowHome() {
         },
         mobile: {
             breakpoint: { max: 464, min: 0 },
-            items: 2
+            items: 3
         }
     };
 
 
 
     return (
-        <div className='max-w-[100vw]  px-6 pt-6 lg:p-0 lg:max-w-[1280px]'>
-            <p className='text-xl lg:text-xl lg:py-12 pb-8  font-bold text-[#2C2A2A]'>People You May Know</p>
+        <div className='max-w-[100vw]   pt-6 lg:p-0 lg:max-w-[1280px]'>
+            <p className=' lg:text-xl px-4 lg:py-12 pb-4  font-bold text-[#2C2A2A]'>People You May Know</p>
             <div className=''>
                 <Carousel
                     swipeable={true}
@@ -74,6 +74,7 @@ function YouMayKnowHome() {
                                 hickies={user.hickies}
                                 pumpkins={user.pumpkins}
                                 dob={user.dob}
+                                coverPicture={user.coverPicture}
                             />
                         </div>
                     ))}

@@ -17,7 +17,7 @@ export default function Profile() {
                 <meta charSet="utf-8" />
             </Head>
             <main className=" flex  h-screen w-screen overflow-auto
-    bg-gradient-to-l justify-center from-[#EFEFEF]   to-[#EFEFEF]
+    bg-gradient-to-l justify-center bg-slate-50
      z-[-1]">
                 <div className="items-center flex flex-col">
                     <span className='flex z-50 w-screen'>

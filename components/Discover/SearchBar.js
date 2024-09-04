@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { BiFilter, BiSearch } from 'react-icons/bi'
+import { BiFilter, BiImageAdd, BiSearch } from 'react-icons/bi'
 import Image01 from '../../assets/images/User-Ex.jpg'
 import { useRouter } from 'next/navigation';
 import { useCookies } from 'next-client-cookies'
@@ -81,22 +81,25 @@ export default function SearchBar() {
           <span className='absolute text-3xl left-5 '>
             <BiSearch />
           </span>
-          <span className={`absolute top-[115%] max-h-[50vh] overflow-auto z-50 rounded-xl -left-4 w-full lg:w-[40vw] bg-white ${showSuggestionBox ? 'block' : 'hidden'}`}>
+          <span className={`absolute top-[115%] max-h-[50vh] overflow-auto z-[100] rounded-xl -left-4 w-full lg:w-[40vw] bg-white ${showSuggestionBox ? 'block' : 'hidden'}`}>
             {suggestedUsers.map((suggestedUser, index) => (
-              <div key={index} className='lg:px-6 px-2 py-6 flex space-x-6 border-b border-gray-100 w-full cursor-pointer' onClick={() => {
+              <div key={index} className='lg:px-6 px-4 py-6 flex space-x-4 border-b border-gray-100 w-full cursor-pointer' onClick={() => {
                 router.push('../../../user-profile')
                 setCookie('selectedUserProfile', suggestedUser._id)
               }}>
-                <Image src={Image01} width={62} height={62} className='rounded-full hidden lg:inline' alt='profile' />
-                <Image src={Image01} width={82} height={82} className='rounded-full lg:hidden' alt='profile'  />
-
-                <div className='flex flex-col space-y-2'>
-                  <div className='flex font-bold text-2xl space-x-4'>
+              {suggestedUser.profilePicture ?
+                <Image src={suggestedUser.profilePicture} width={50} height={50} className='rounded-full' alt='profile' />
+                : <div onClick={() => setShowCropper(true)} className='bg-gray-300 flex items-center justify-center  h-[50px] w-[50px] rounded-full '>
+                    <BiImageAdd className='opacity-60 cursor-pointer active:scale-105' />
+                </div>
+            }
+                <div className='flex flex-col space-y-1'>
+                  <div className='flex font-bold  space-x-4'>
                     <p>{suggestedUser.name}</p>
                     <p>{getSurnameInitials(suggestedUser.surname)}</p>
                     <p>{calculateAge(suggestedUser.dob)}</p>
                   </div>
-                  <div className='text-gray-500 flex space-x-4'>
+                  <div className='text-gray-500 flex text-sm space-x-4'>
                     <div className='space-x-2 flex '>
                       <p className='font-bold'>{suggestedUser.pumpkins}</p>
                       <p>Pumpkins</p>
@@ -106,11 +109,7 @@ export default function SearchBar() {
                       <p>Hickies</p>
                     </div>
                   </div>
-                  <div className='flex items-center'>
-                    <div className='bg-gray-200 px-6 text-blue-700 py-0.5 rounded-full flex-wrap'>
-                      <p>New</p>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             ))}

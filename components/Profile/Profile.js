@@ -9,6 +9,7 @@ import ImageInput from '../UI/ImageInput/ImageInput'
 import { BiImageAdd, BiPlus, BiUserPlus } from 'react-icons/bi'
 import ImageCropper from '../ImageCropper/ImageCropper'
 import Loader from '../UI/Loader'
+import CoverImageCropper from '../ImageCropper/CoverImageCropper'
 
 
 function ProfileHome() {
@@ -28,7 +29,12 @@ function ProfileHome() {
     const [showCropper, setShowCropper] = useState(false)
     const [userPosts, setUserPosts] = useState([])
     const [posts, setPosts] = useState([])
-
+    const [nextImage, setNextImage] = useState(false)
+    const [incomeRange, setIncomeRange] = useState("")
+    const [incomeRangeMatch, setIncomeRangeMatch] = useState("")
+    const [facebookLink, setFacebookLink] = useState("")
+    const [instagramLink, setInstagramLink] = useState("")
+    const [twitterLink, setTwitterLink] = useState("")
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -43,7 +49,7 @@ function ProfileHome() {
             }),
         }).then(async (response) => {
             const result = await response.json();
-            alert("Profile Updated")
+            ("Profile Updated")
             setSetshowEditBox(false)
             const selectedUser = users.find(
                 (used) => used.email === user.email
@@ -137,15 +143,32 @@ function ProfileHome() {
 
     if (user) {
         return (
-            <div className=' relative bg-gradient-to-b space-y-6 from-black/5 to-white/0 lg:py-16 py-2 px-6 lg:px-16'>
-                <span className={`absolute z-50 lg:left-[25%]  top-15   ${showCropper ? "block" : "hidden"}`}>
-                    <div className='relative flex-1 px-4'>
+            <div className=' relative bg-gradient-to-b space-y-6 bg-slate-100 lg:py-16 py-2 px-6 lg:px-16'>
+                <span className={`absolute z-50 px-6 w-full h-full   left-0 lg:left-[25%] top-10  ${showCropper ? "block" : "hidden"}`}>
+                    <div className='relative flex-1 '>
+
                         <div className='absolute'>
                             <BiPlus className='rotate-45' />
                         </div>
-                        <ImageCropper />
+                        <div className='flex '>
+                            <ImageCropper />
+                        </div>
+
                     </div>
                 </span>
+                <span className={`absolute z-50 px-6 w-full h-full   left-0 lg:left-[25%] top-10  ${nextImage ? "block" : "hidden"}`}>
+                <div className='relative flex-1 '>
+
+                    <div className=''>
+                        <BiPlus className='rotate-45' />
+                    </div>
+                    <div className='flex '>
+                        <CoverImageCropper />
+                    </div>
+
+                </div>
+            </span>
+
                 <div className='flex flex-col lg:flex-row items-center lg:space-y-0 space-y-6 lg:space-x-12'>
                     <div className='relative'>
                         {user.profilePicture ?
@@ -157,7 +180,7 @@ function ProfileHome() {
 
                     </div>
                     <div className='flex flex-col items-center lg:items-start space-y-2'>
-                        <div className='flex font-bold text-xl space-x-2 lg:space-x-4 lg:text-4xl'>
+                        <div className='flex font-bold text-xl space-x-2 lg:space-x-4 lg:text-2xl'>
                             <p className=''>{user.name}</p>
                             <p className=''>{user.surname}</p>
                             {user.dob ?
@@ -193,8 +216,11 @@ function ProfileHome() {
                         </div>
                     </div>
 
-                    <div className='flex lg:space-x-16 font-bold lg:flex-row text-lg  items-center space-y-6 flex-col lg:space-y-0 '>
-                        <p className='hover:scale-105 cursor-pointer active:bg-gray-200' onClick={() => setSetshowEditBox(true)}>Edit Profile</p>
+                    <div className='flex lg:space-x-16  lg:flex-row   items-center space-y-6 flex-col lg:space-y-0 '>
+                        <div className='flex space-x-12 text-blue-600 '>
+                            <p className='hover:scale-105 cursor-pointer active:bg-gray-200' onClick={() => setNextImage(true)}>Add Cover Picture</p>
+                            <p className='hover:scale-105 cursor-pointer active:bg-gray-200' onClick={() => setSetshowEditBox(true)}>Edit Profile</p>
+                        </div>
                         <div>
                             <Button label={"Post"} variant={"primary"} onClick={() => {
                                 router.push('../../post')
@@ -251,7 +277,7 @@ function ProfileHome() {
                         </div>
                     </div>
                 </div>
-                <span  className={`fixed z-20  h-screen flex  bg-black/10 py-12 items-center justify-center px-4 top-0 left-0 w-full  ${setshowEditBox ? 'block' : 'hidden'} `}>
+                <span className={`fixed z-20  h-screen flex  bg-black/10 py-12 items-center justify-center px-4 top-0 left-0 w-full  ${setshowEditBox ? 'block' : 'hidden'} `}>
                     <div className={`    bg-white py-6 lg:py-12 px-4 lg:px-8 rounded-xl   lg:w-6/12 w-full  `}>
                         <div className='flex justify-between py-6'>
                             <p className='font-bold text-2xl'>Edit Profile</p>
@@ -292,6 +318,12 @@ function ProfileHome() {
                                         }}>Add</button>
                                     </div>
                                 </div>
+                                <input value={incomeRange} onChange={(e) => setIncomeRange(e.target.value)} placeholder='Income Range' className='w-full min-h-8 outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                <input value={incomeRangeMatch} onChange={(e) => setIncomeRangeMatch(e.target.value)} placeholder='Your matches range income' className='w-full min-h-8 outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                <input value={facebookLink} onChange={(e) => setFacebookLink(e.target.value)} placeholder='Facebook Profile Link' className='w-full min-h-8 outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                <input value={instagramLink} onChange={(e) => setInstagramLink(e.target.value)} placeholder='Instagram Profile Link' className='w-full min-h-8 outline outline-1 rounded-2xl outline-gray-300 p-2' />
+                                <input value={twitterLink} onChange={(e) => setTwitterLink(e.target.value)} placeholder='Twitter Profile Link' className='w-full min-h-8 outline outline-1 rounded-2xl outline-gray-300 p-2' />
+
                             </div>
                             <Button label={"Save"} variant={"primary"} onClick={handleSubmit} />
                         </div>

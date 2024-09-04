@@ -1,10 +1,11 @@
 'use client'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
-import { BiArrowBack, BiDotsVerticalRounded, BiHeart } from 'react-icons/bi'
+import { BiArrowBack, BiChat, BiDotsVerticalRounded, BiHeart } from 'react-icons/bi'
 import Button from '../Button/Button'
+import { IoChatbubbleOutline } from "react-icons/io5";
 
-import {} from "react-icons/fi"
+import { } from "react-icons/fi"
 import { useRouter } from 'next/navigation'
 import { setCookie } from 'cookies-next'
 import { useCookies } from 'next-client-cookies'
@@ -59,13 +60,13 @@ function UserPost({ surname, profilePicture, email, username, likes, likedUsersD
 
   return (
     <div>
-      <div className='bg-white shadow flex justify-between items-center px-4 lg:px-8 lg:py-4 py-2'>
+      <div className='bg-white  flex justify-between items-center px-4 lg:px-8 lg:py-4 py-2'>
         <div className='flex space-x-4 items-center'>
           <div>
             <Image src={profilePicture} width={50} height={50} className='rounded-full' />
           </div>
           <div>
-            <div className='flex lg:text-xl text-lg space-x-2 font-bold'>
+            <div className='flex lg:text-lg  space-x-2 font-bold'>
               <p>{username}</p>
               <p>{surname}</p>
             </div>
@@ -89,18 +90,29 @@ function UserPost({ surname, profilePicture, email, username, likes, likedUsersD
       </div>
       <div className='space-y-2'>
         <div className='flex space-y-2 items-center flex-col'>
-          <div>
-            <Image src={image} width={500} height={400} className='' />
+          <div className='px-4 pt-2 '>
+            <Image src={image} width={500} height={400} className='rounded-2xl' />
           </div>
-          <div className='flex w-full justify-start px-4 line-clamp-3'><p>{caption}</p></div>    
+          <div className='flex lg:text-3xl text-2xl space-x-4 justify-start  w-full px-4 items-start'>
+            <div className='flex items-center space-x-2'> 
+              <div className='  cursor-pointer active:scale-105'>
+                {liked ? <FaHeart className='text-black' /> : <BiHeart onClick={handleLike} className='text-black' />}
+              </div>
+              <p className='text-base lg:text-lg font-bold'>{likedUsers.length}</p>
+            </div>
+            <div className='flex items-center  space-x-2'>
+              <IoChatbubbleOutline />
+              <p className='text-base lg:text-lg font-bold'>0</p>
+            </div>
+          </div>
+
+
+          <div className='flex w-full justify-start space-x-2 px-4 line-clamp-3'>
+            <p className='font-bold'>@{username + " " + surname}</p>
+            <p>{caption}</p></div>
         </div>
         <div className='flex space-x-4 px-4  items-center'>
-          <div className='flex space-x-2 items-center'>
-            <div className='lg:text-3xl text-2xl  cursor-pointer active:scale-105' onClick={handleLike}>
-                {liked? <FaHeart className='text-black' /> : <BiHeart onClick={handleLike} className='text-black' />}
-            </div>
-            <p className='text-lg font-bold'>{likedUsers.length}</p>
-          </div>
+
         </div>
       </div>
     </div>

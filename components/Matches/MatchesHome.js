@@ -37,7 +37,7 @@ function MatchesHome() {
     };
     return (
         <div className='max-w-[90vw]  px-6  lg:p-0 lg:max-w-[600px] '>
-            <p className='text-xl lg:text-2xl lg:py-8 py-4  font-bold text-white'>Matches</p>
+            <p className='text-xs lg:py-8 py-4  font-bold text-black'>.</p>
             <div className=''>
                 <Carousel
                     swipeable={true}
@@ -47,7 +47,7 @@ function MatchesHome() {
                     responsive={responsive}
                     className=''>
                     {users.map((user) => (
-                        <div key={user._id} className='lg:mx-4 mx-2  '>\
+                        <div key={user._id} className='lg:mx-4 mx-2  w-full flex justify-center '>\
                             <ProfileCardMatches
                                 id={user._id}
                                 image={user.profilePicture}
@@ -57,7 +57,8 @@ function MatchesHome() {
                                 dob={user.dob}
                                 hickies={user.hickies}
                                 pumpkins={user.pumpkins}
-                                key={user._id} /></div>
+                                key={user._id}
+                                coverPicture={user.coverPicture} /></div>
                     ))}
                 </Carousel>
             </div>

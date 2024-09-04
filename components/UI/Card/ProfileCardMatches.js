@@ -4,8 +4,9 @@ import Image from 'next/image'
 import Button from '../Button/Button';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
-import ImageCArd from '../../../assets/images/Bottom Bar.png'
-function ProfileCardMatches({ id ,username,email, name, image, surname = '', hickies, pumpkins, dob }) {
+import { BiImageAdd, BiUser } from 'react-icons/bi';
+
+function ProfileCardPro({ id, username, email, coverPicture, name, image, surname = '', hickies, pumpkins, dob }) {
     function getSurnameInitials(surname) {
         // Split the surname into an array of words
         const surnameWords = (surname || '').trim().split(' ');
@@ -33,34 +34,50 @@ function ProfileCardMatches({ id ,username,email, name, image, surname = '', hic
         return age;
     }
     return (
-        <div className=' relative px-4 items-center space-y-4 lg:space-y-6 flex-col flex w-full' onClick={() => {
+        <div className=' relative max-w-[300px] px-1 md:px-2 lg:px-2 items-center space-y-4 lg:space-y-6 cursor-pointer flex-col flex w-full' onClick={() => {
             setCookie('selectedUserProfile', email)
             router.push(`../../user-profile`)
         }}>
-            <Image src={image} width={200} height={200} className='rounded-full' />
-            <span className='  bottom-0    rounded-b-[12px] px-2 lg:px-6'>
-                <div  className='text-white  lg:space-y-2 -space-y-1 lg:-space-x-2 flex flex-col w-full items-center '>
-                    <div className='flex font-bold  text-xl lg:text-3xl space-x-3'>
-                        <div className='space-x-1 flex'>
-                            <p>{name}</p>
-                            <p>{getSurnameInitials(surname)},</p>
+            {coverPicture ?
+                <div className='relative  items-center justify-center flex'>
+                    <Image src={coverPicture} width={300} height={800} className=' hidden lg:inline lg:rounded-3xl rounded-xl' alt='profile' />
+                    <Image src={coverPicture} width={300} height={800} className=' lg:hidden lg:rounded-3xl rounded-xl' alt='profile' />
+                    <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent rounded-b-3xl'></div>
+                </div>
+                : <div className='relative'>
+                    <Image
+                        src={'https://firebasestorage.googleapis.com/v0/b/pumpkin-web.appspot.com/o/posts%2FCImkQo7VhL6HSz8pu4sc%2Fimage?alt=media&token=8cc0a660-ca8b-461c-bfd3-a324aeeec56c'}
+                        className='object-contain lg:rounded-3xl rounded-xl'
+                        width={300}
+                        height={800}
+                    />
+                    <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent rounded-b-3xl'></div>
+                </div>
+            }
+            <span className='  bottom-5 lg:bottom-2 z-20 w-full  absolute  rounded-b-[12px] px-2 lg:px-6'>
+                <div className='text-white   -space-y-1  flex px-2 flex-col w-full items-start '>
+                    <div className='flex font-bold  lg:w-64 text-xs lg:text-base'>
+                        <div className=' flex '>
+                            <p className=' line-clamp-1 '>{name}</p>
+
                         </div>
-                        <p>{calculateAge(dob)}</p>
+                        <div className='ml-2 flex '>
+                            <p className=' line-clamp-1 '>{surname}</p>
+                        </div>
                     </div>
-                    <div className='flex  lg:text-xl pt-2 text-xs  line-clamp-1 text-nowrap space-x-2'>
+                    <div>
+                        <p className='text-sm lg:text-base'>@{username}</p>
+                    </div>
+                    <div className='flex   pt-2 sm:text-[8px] lg:text-xs  line-clamp-1 text-nowrap space-x-2'>
                         <p className=' text-nowrap line-clamp-1'>{pumpkins} Pumkins - {hickies} Hickies</p>
                     </div>
-                    <div className='hidden lg:inline pt-6'>
-                        <Button label={'View Profile'} variant={"primary"} onClick={() => {
-                            setCookie('selectedUserProfile', id)
-                            router.push(`../../user-profile`)
-                        }} />
+                    <div className=' pt-4'>
+                        <p className='bg-white px-2 py-1 rounded-full text-xs text-blue-600 font-bold'>New</p>
                     </div>
                 </div>
             </span>
-            <Image src={ImageCArd} width={200} height={50} alt='no' className=' pt-16' />
         </div>
     )
 }
 
-export default ProfileCardMatches
+export default ProfileCardPro

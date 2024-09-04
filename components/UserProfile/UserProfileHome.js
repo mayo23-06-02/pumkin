@@ -126,8 +126,7 @@ function UserProfileHome() {
             }),
         }).then(async (response) => {
             const result = await response.json();
-            alert("Shoter Request Submitted")
-
+            router.push('../../feed');
         });
 
     }
@@ -187,14 +186,14 @@ function UserProfileHome() {
                 <div className='flex flex-col lg:flex-row items-center lg:space-y-0 space-y-6 lg:space-x-12'>
                     <div>
                         {selectedUserData.profilePicture ?
-                            <Image src={selectedUserData.profilePicture} width={150} height={150} className='rounded-full' alt='profile' />
-                            : <div className='bg-gray-300 flex items-center justify-center  h-[150px] w-[150px] rounded-full p-6'>
+                            <Image src={selectedUserData.profilePicture} width={100} height={100} className='rounded-full' alt='profile' />
+                            : <div className='bg-gray-300 flex items-center justify-center  h-[100px] w-[100px] rounded-full p-6'>
                                 <BiUser className='text-5xl cursor-pointer active:scale-105' />
                             </div>
                         }
                     </div>
                     <div className='flex flex-col items-center lg:items-start space-y-2'>
-                        <div className='flex font-bold text-xl space-x-2 lg:space-x-4 lg:text-4xl'>
+                        <div className='flex font-bold text-sm space-x-2 lg:space-x-4 lg:text-xl'>
                             <p className=''>{selectedUserData.name}</p>
                             <p className=''>{selectedUserData.surname},</p>
                             <p>{calculateAge(selectedUserData.dob)}</p>
@@ -205,24 +204,25 @@ function UserProfileHome() {
                         </div>
                     </div>
                 </div>
-                <div className='flex space-y-16 lg:space-y-0  flex-col lg:flex-row items-center lg:justify-between w-full'>
+                <div className='flex space-y-4 lg:space-y-0  flex-col lg:flex-row items-center lg:justify-between w-full'>
                     <div className='flex items-center space-x-6'>
-                        <div className='flex  space-x-2 lg:text-2xl '>
+                        <div className='flex  space-x-2 lg:text-lg text-sm'>
                             <p className='font-bold'>{selectedUserData.posts.length}</p>
                             <p>Posts</p>
                         </div>
-                        <div className='flex  space-x-2 lg:text-2xl '>
+                        <div className='flex  space-x-2 lg:text-lg text-sm'>
                             <p className='font-bold'>{selectedUserData.pumpkins}</p>
                             <p>Pumkins</p>
                         </div>
-                        <div className='flex  space-x-2 lg:text-2xl '>
+                        <div className='flex  space-x-2 lg:text-lg text-sm'>
                             <p className='font-bold'>{selectedUserData.hickies}</p>
                             <p>Hickies</p>
                         </div>
                     </div>
 
-                    <div className='flex lg:space-x-16 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-10 flex-col lg:space-y-0 '>
-                        <p onClick={toggleShooter} className='hover:scale-105 cursor-pointer'>Shoot Your Shot</p>
+                    <div className='flex lg:space-x-4 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-2 flex-col lg:space-y-0 '>
+              
+                        <Button label={'Shoot your shot'} variant={'tertiary'} onClick={toggleShooter} />
                         <div>
                             <Button label={"Pumkin"} variant={"primary"} onClick={() => {
                                 router.push('../../post')
@@ -234,7 +234,7 @@ function UserProfileHome() {
                 <div className=' grid grid-rows-2 lg:grid-cols-2 lg:grid-flow-row grid-flow-col'>
                     <div className='space-y-12'>
                         <div className='space-y-4'>
-                            <div className='font-bold text-xl'>
+                            <div className='font-bold '>
                                 <p>Bio</p>
                             </div>
                             <div className=' max-w-[400px] lg:text-xl'>
@@ -244,7 +244,7 @@ function UserProfileHome() {
                             </div>
                         </div>
                         <div className='space-y-4'>
-                            <div className='font-bold text-xl'>
+                            <div className='font-bold '>
                                 <p>Hobbies</p>
                             </div>
                             <div className="flex space-x-2 max-w-[90vw] overflow-auto py-2">
@@ -256,7 +256,7 @@ function UserProfileHome() {
                             </div>
                         </div>
                         <div className='space-y-4'>
-                            <div className='font-bold text-xl'>
+                            <div className='font-bold '>
                                 <p>Passions</p>
                             </div>
                             <div className=" flex space-x-2 sm:w-[90vw] overflow-auto  py-2">

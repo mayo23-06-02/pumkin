@@ -12,10 +12,10 @@ import { useRouter } from "next/navigation";
 import Button from "../UI/Button/Button";
 import Check from '../../assets/check.gif'
 
-const ASPECT_RATIO = 1;
+const ASPECT_RATIO = 6 / 9;
 const MIN_DIMENSION = 50;
 
-const ImageCropper = () => {
+const CoverImageCropper = () => {
     const router = useRouter()
     const cookies = useCookies();
     const [user, setUser] = useState();
@@ -154,14 +154,14 @@ const ImageCropper = () => {
             console.log("User email:", user.email);
             console.log("Saved image URL:", savedImageUrl);
 
-            const response = await fetch("/api/profile-picture", {
+            const response = await fetch("/api/add-cover", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     email: user.email,
-                    profilePicture: savedImageUrl,
+                    coverPicture: savedImageUrl,
                 }),
             });
 
@@ -180,7 +180,7 @@ const ImageCropper = () => {
     return (
         <div className=" fixed flex flex-col py-8 px-6 l space-y-16  items-center lg:w-[50vw] w-[90vw]  bg-white rounded-3xl ">
             <div>
-                <p className="text-xl font-bold">Add Profile Picture</p>
+                <p className="text-xl font-bold">Add Cover Picture</p>
             </div>
             <div onClick={handleButtonClick} className={`border-2 border-dotted flex items-center justify-center  h-[150px] w-[150px] rounded-xl p-6 ${showImageaAdd ? '' : 'hidden'} `}>
                 <BiImageAdd className='text-5xl cursor-pointer active:scale-105 ' />
@@ -209,7 +209,6 @@ const ImageCropper = () => {
                                     onChange={(newCrop) => setCrop(newCrop)}
                                     onComplete={onCropComplete}
                                     keepSelection
-                                    circularCrop
                                     aspect={ASPECT_RATIO}
                                     minWidth={MIN_DIMENSION}
                                 >
@@ -223,7 +222,7 @@ const ImageCropper = () => {
                 </div>
             </div>
             {showImageaAdd ?
-                <Button label={'Add Profile Picture'} variant={'primary'} loader={false} onClick={handleButtonClick} />
+                <Button label={'Add Cover Picture'} variant={'primary'} loader={false} onClick={handleButtonClick} />
                 :
                 <button
                     onClick={() => {
@@ -240,4 +239,4 @@ const ImageCropper = () => {
     );
 };
 
-export default ImageCropper;
+export default CoverImageCropper;

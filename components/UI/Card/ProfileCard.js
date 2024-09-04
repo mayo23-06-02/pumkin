@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 import { BiImageAdd, BiUser } from 'react-icons/bi';
 
-function ProfileCard({ id, username, email, name, image, surname = '', hickies, pumpkins, dob }) {
+function ProfileCard({ id, username, email, coverPicture, name, image, surname = '', hickies, pumpkins, dob }) {
     function getSurnameInitials(surname) {
         // Split the surname into an array of words
         const surnameWords = (surname || '').trim().split(' ');
@@ -34,36 +34,41 @@ function ProfileCard({ id, username, email, name, image, surname = '', hickies, 
         return age;
     }
     return (
-        <div className=' relative px-4 items-center space-y-4 lg:space-y-6 flex-col flex w-full' onClick={() => {
+        <div className=' relative px-1 md:px-2 lg:px-2 items-center space-y-4 lg:space-y-6 cursor-pointer flex-col flex w-full' onClick={() => {
             setCookie('selectedUserProfile', email)
             router.push(`../../user-profile`)
         }}>
-            {image ?
-                <div className='lg:h-[150px] lg:w-[150px] h-[100px] w-[100px] items-center justify-center flex'>
-                    <Image src={image} width={150} height={150} className='rounded-full hidden lg:inline' alt='profile' />
-                    <Image src={image} width={100} height={100} className='rounded-full lg:hidden' alt='profile' />
+            {coverPicture ?
+                <div className='relative  items-center justify-center flex'>
+                    <Image src={coverPicture} width={800} height={800} className=' hidden lg:inline lg:rounded-3xl rounded-xl' alt='profile' />
+                    <Image src={coverPicture} width={800} height={800} className=' lg:hidden lg:rounded-3xl rounded-xl ' alt='profile' />
+                    <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl lg:rounded-3xl '></div>
                 </div>
-                : <div className='bg-gray-300 flex items-center justify-center  h-[100px] w-[100px] lg:h-[150px] lg:w-[150px] rounded-full p-6'>
-                    <BiUser className='lg:text-5xl text-3xl  active:scale-105' />
+                : <div className='relative'>
+                    <Image
+                        src={'https://firebasestorage.googleapis.com/v0/b/pumpkin-web.appspot.com/o/posts%2FCImkQo7VhL6HSz8pu4sc%2Fimage?alt=media&token=8cc0a660-ca8b-461c-bfd3-a324aeeec56c'}
+                        className='object-contain lg:rounded-3xl rounded-xl'
+                        width={500}
+                        height={800}
+                    />
+                    <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl lg:rounded-3xl'></div>
                 </div>
             }
-            <span className='  bottom-0    rounded-b-[12px] px-2 lg:px-6'>
-                <div className='text-black   -space-y-1 lg:-space-x-2 flex flex-col w-full items-center '>
-                    <div className='flex font-bold  text-xl lg:text-xl space-x-3 line-clamp-1 max-w-32 lg:w-64 '>
-                        <div className='space-x-1 flex '>
-                            <p>{name}</p>
-                            <p>{getSurnameInitials(surname)},</p>
+            <span className='  bottom-2 lg:bottom-2 z-20 w-full  absolute  rounded-b-[12px] px-2 lg:px-6'>
+                <div className='text-white   -space-y-2  flex px-2 flex-col w-full items-start '>
+                    <div className='flex font-bold  lg:w-64 text-xs lg:text-base'>
+                        <div className=' flex '>
+                            <p className=' line-clamp-1 '>{name}</p>
                         </div>
-                        {dob? <p>{calculateAge(dob)}</p> : <p></p>}
                     </div>
-                    <div className='flex   pt-2 text-xs  line-clamp-1 text-nowrap space-x-2'>
+                    <div className='flex   pt-2 text-[8px]  line-clamp-1 text-nowrap space-x-2'>
                         <p className=' text-nowrap line-clamp-1'>{pumpkins} Pumkins - {hickies} Hickies</p>
                     </div>
+                    <div className=' pt-4'>
+                        <p className='bg-white px-2 py-1 rounded-lg text-[6px] text-blue-600 font-bold'>New</p>
+                    </div>
                     <div className='hidden lg:inline pt-6'>
-                        <Button label={'View Profile'} variant={"primary"} onClick={() => {
-                            setCookie('selectedUserProfile', id)
-                            router.push(`../../user-profile`)
-                        }} />
+
                     </div>
                 </div>
             </span>

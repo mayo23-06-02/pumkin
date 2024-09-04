@@ -11,7 +11,7 @@ export default function Matches() {
      z-[-1]">
       <span className='absolute z-50 w-full'>
       </span>
-      <div className='max-w-[1280px] w-full flex-col flex items-center'>
+      <div className='max-w-[1280px] w-full flex-col flex lg:space-y-24 items-center'>
         <MainHeader />
         <MatchesHome />
       </div>
