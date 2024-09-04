@@ -4,7 +4,7 @@ import ImageProfile from '../../../assets/images/User-Ex.jpg'
 import { BiUser } from 'react-icons/bi'
 import ShooterRequest from '../Pop-Up/ShooterRequest'
 
-export default function NotificationItem({ profilePicture, name, time, surname, senderData, message, hint, specialName,  }) {
+export default function NotificationItem({ profilePicture, name, shooter, time, surname, senderData, message, hint, specialName,  }) {
     const [showShooter, setShowShooter] = useState(false)
 
     function handleShooter(params) {
@@ -36,7 +36,7 @@ export default function NotificationItem({ profilePicture, name, time, surname, 
             </div>
 
             <span className={`absolute top-[20%] lg:top-[50%] left-[5%] lg:left-[30vw]  w-full ${showShooter ? 'block' : 'hidden'}`}>
-                <ShooterRequest senderProfile={senderData} message={message} hint={hint} specialName={specialName}/>
+                <ShooterRequest senderProfile={senderData} message={shooter?.message} hint={shooter?.hint} specialName={shooter?.specialName}/>
             </span>
         </div>
     )

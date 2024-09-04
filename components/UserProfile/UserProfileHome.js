@@ -24,7 +24,38 @@ function UserProfileHome() {
     const [message, setMessage] = useState("")
     const [hint, setHint] = useState("")
     const [userPosts, setUserPosts] = useState([])
+    const [userNotifications, setUserNotifications] = useState([])
 
+   const senderEmail = cookies.get('email');
+
+    useEffect(() => {
+     
+        const fetchNotifications = async () => {
+            try {
+                const response = await fetch('/api/pumpkin');
+                const pumpkinData = await response.json();
+                console.log("asambe", senderEmail);
+
+                // Combine the notifications
+                const combinedNotifications = [pumpkinData];
+
+                // Filter notifications for the current user and sort by timestamp
+                const selectedNotifications = pumpkinData
+                    .filter(post => post.senderEmail === senderEmail);
+                console.log(combinedNotifications);
+
+                setUserNotifications(selectedNotifications);
+            } catch (error) {
+                console.error("Error fetching notifications:", error);
+            }
+        };
+
+        fetchNotifications();
+    }, [cookies]);
+
+    useEffect(() => {
+        console.log("asambe", userNotifications);
+    }, [userNotifications]);
 
     function toggleShooter() {
         setShowShooter(!showShooter)
@@ -50,7 +81,7 @@ function UserProfileHome() {
             .then((res) => res.json())
             .then((data) => {
                 const selectedPosts = data.filter(
-                    (post) => post.email === selectedUserData.email
+                    (post) => post?.email === selectedUserData?.email
                 );
                 console.log(selectedPosts);
                 if (selectedPosts.length > 0) {
@@ -131,7 +162,50 @@ function UserProfileHome() {
 
     }
 
+    function handleSubmitPumkin(e) {
+        setShowShooter(true)
+        e.preventDefault();
+        const timestamp = new Date().toISOString(); // Create a timestamp
+        const senderEmail = cookies.get('email');
+        const senderData = JSON.parse(cookies.get('userData'))
 
+        setShooterRequest()
+        let res = fetch("/api/pumpkin", {
+            method: "POST",
+            body: JSON.stringify({
+                "senderEmail": senderEmail,
+                "senderData": senderData,
+                "email": selectedUserData.email,
+                "timestamp": timestamp,
+                "seen": false
+            }),
+        }).then(async (response) => {
+            const result = await response.json();
+            router.push('../../feed');
+        });
+
+    }
+
+    
+    function handleSubmitDeletePumkin(e) {
+        setShowShooter(true)
+        e.preventDefault();
+        const timestamp = new Date().toISOString(); // Create a timestamp
+        const senderEmail = cookies.get('email');
+        const senderData = JSON.parse(cookies.get('userData'))
+
+        setShooterRequest()
+        let res = fetch("/api/pumpkin", {
+            method: "DELETE",
+            body: JSON.stringify({
+                "email": selectedUserData.email,
+            }),
+        }).then(async (response) => {
+            const result = await response.json();
+            router.push('../../feed');
+        });
+
+    }
 
     if (selectedUserData) {
         return (
@@ -221,13 +295,15 @@ function UserProfileHome() {
                     </div>
 
                     <div className='flex lg:space-x-4 font-bold lg:flex-row text-xl lg:text-xl items-center space-y-2 flex-col lg:space-y-0 '>
-              
+
                         <Button label={'Shoot your shot'} variant={'tertiary'} onClick={toggleShooter} />
                         <div>
-                            <Button label={"Pumkin"} variant={"primary"} onClick={() => {
-                                router.push('../../post')
-                            }} />
+                         {userNotifications.length > 0 ?
+                               <Button label={"GWABABA"} variant={"tertiary"} onClick={handleSubmitDeletePumkin} /> :
+                               <Button label={"Pumkin"} variant={"primary"} onClick={handleSubmitPumkin} />
+                         }
                         </div>
+                         
                     </div>
                 </div>
 

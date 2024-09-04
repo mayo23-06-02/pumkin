@@ -27,34 +27,64 @@ function MainHeader() {
 
     useEffect(() => {
         const email = cookies.get('email')
-        console.log(email);
-        fetch('/api/shooter')
-            .then((res) => res.json())
-            .then((data) => {
-                setShooterNotification(data)
-                const selectedNotifications = data.filter(
-                    (post) => post.email === email
-                );
 
-                console.log(selectedNotifications);
-                if (selectedNotifications.length > 0) {
-                    setUserNotifications(selectedNotifications);
-                }
-            })
+        const fetchNotifications = async () => {
+            try {
+                const [shooterResponse, pumpkinResponse] = await Promise.all([
+                    fetch('/api/shooter'),
+                    fetch('/api/pumpkin')
+                ]);
 
+                const shooterData = await shooterResponse.json();
+                const pumpkinData = await pumpkinResponse.json();
 
-    }, [])
+                // Combine the notifications
+                const combinedNotifications = [...shooterData, ...pumpkinData];
+
+                // Filter notifications for the current user and sort by timestamp
+                const selectedNotifications = combinedNotifications
+                    .filter(post => post.email === email)
+                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                setUserNotifications(selectedNotifications);
+            } catch (error) {
+                console.error("Error fetching notifications:", error);
+            }
+        };
+
+        fetchNotifications();
+    }, [cookies]);
 
     useEffect(() => {
-        const unseenNotifications = userNotifications.filter(
-            (post) => post.seen === false
-        );
+        const unseenNotifications = userNotifications.filter(post => !post.seen);
+
         if (unseenNotifications.length > 0) {
             setUnseenNotifications(unseenNotifications);
+
+            // Update the status of unseen notifications
+            unseenNotifications.forEach(async (notification) => {
+                await handleSubmitStatus(notification._id);
+            });
         }
     }, [userNotifications]);
-
     console.log(unseenNotifications, "sila");
+
+    async function handleSubmitStatus(_id) {
+        try {
+            await fetch("/api/shooter", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    _id: _id,
+                    seen: true,
+                }),
+            });
+        } catch (error) {
+            console.error("Error updating notification status:", error);
+        }
+    }
 
 
     return (
