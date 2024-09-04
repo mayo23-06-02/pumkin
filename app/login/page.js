@@ -11,9 +11,7 @@ export default function Login() {
       <span className='absolute z-50 w-full'>
         <Header />
       </span>
-      <span className="absolute">
-        <Image src={PatternF} width={1280} height={500} />
-      </span>
+      
       <div className='max-w-[1280px]'>
         <LoginHome />
       </div>
