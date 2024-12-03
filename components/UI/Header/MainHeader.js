@@ -89,7 +89,7 @@ function MainHeader() {
 
     return (
         <div className="relative w-full   bg-white
-             lg:bg-white/5 lg:bg-opacity-20 lg:backdrop-blur-lg  grid grid-cols-3 grid-flow-col lg:flex justify-between  px-6 items-center  lg:px-8 py-4">
+              grid grid-cols-3 grid-flow-col lg:flex justify-between  px-6 items-center  lg:px-8 py-4">
             <div className='lg:hidden relative'>
                 <dvi>
                     {showSideDrawer ? <BiPlus className='text-3xl rotate-45' onClick={onToggleSideDrawer} /> : <BiMenu className='text-3xl' onClick={onToggleSideDrawer} />}

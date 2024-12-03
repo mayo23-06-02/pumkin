@@ -7,11 +7,8 @@ export default function Home() {
     <main className=" flex justify-center h-screen w-full overflow-auto
     bg-gradient-to-l from-[#C3530A]  to-[#191222]
      z-[-1]">
-      <span className='absolute z-50 w-full'>
+      <span className='absolute z-[100] w-full'>
         <Header />
-      </span>
-      <span className="absolute">
-        <Image src={PatternF} width={1280} height={500} />
       </span>
       <div className='max-w-[1280px]'>
         <LandingPage />

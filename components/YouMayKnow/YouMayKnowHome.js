@@ -14,17 +14,10 @@ function YouMayKnowHome() {
     const [users, setUsers] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
 
-
     useEffect(() => {
-        // const userData = cookies.get('userData')
-        // if (userData) {
-        //     setUser(JSON.parse(userData))
-        // }
         fetch('/api/auth')
             .then((res) => res.json())
             .then((data) => {
-                // Filter out the user with the selectedUserEmail
-                // Randomize the order of the users
                 const randomizedUsers = data.sort(() => Math.random() - 0.5);
                 setUsers(randomizedUsers)
             })
@@ -33,27 +26,29 @@ function YouMayKnowHome() {
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
-            items: 5
+            items: 5,
+            partialVisibilityGutter: 30 // Adjust this value as needed
         },
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 4
+            items: 3,
+            partialVisibilityGutter: 30 // Adjust this value as needed
         },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
-            items: 3
+            items: 3,
+            partialVisibilityGutter: 30 // Adjust this value as needed
         },
         mobile: {
             breakpoint: { max: 464, min: 0 },
-            items: 3
+            items: 2,
+            partialVisibilityGutter: 30 // Adjust this value as needed
         }
     };
 
-
-
     return (
-        <div className='max-w-[100vw]   pt-6 lg:p-0 lg:max-w-[1280px]'>
-            <p className=' lg:text-xl px-4 lg:py-12 pb-4  font-bold text-[#2C2A2A]'>People You May Know</p>
+        <div className='max-w-[100vw] pt-6 lg:p-0 lg:max-w-[1280px]'>
+            <p className='lg:text-xl px-4 lg:py-12 pb-4 font-bold text-[#2C2A2A]'>People You May Know</p>
             <div className=''>
                 <Carousel
                     swipeable={true}
@@ -61,6 +56,7 @@ function YouMayKnowHome() {
                     showDots={false}
                     infinite={true}
                     responsive={responsive}
+                    partialVisible={true} // Ensure partial visibility
                     className=''>
                     {users.map((user) => (
                         <div key={user._id}>

@@ -1,4 +1,5 @@
 import LoginHome from "@/components/Login Page/LoginHome";
+import NewUserPopUp from "@/components/PopUp/NewUser";
 import ProfileHome from "@/components/Profile/Profile";
 import Header from "@/components/UI/Header/Header";
 import MainHeader from "@/components/UI/Header/MainHeader";
@@ -17,8 +18,8 @@ export default function Profile() {
                 <meta charSet="utf-8" />
             </Head>
             <main className=" flex  h-screen w-screen overflow-auto
-    bg-gradient-to-l justify-center bg-slate-50
-     z-[-1]">
+    bg-gradient-to-l justify-center relative bg-slate-50
+     ">
                 <div className="items-center flex flex-col">
                     <span className='flex z-50 w-screen'>
                         <MainHeader />
@@ -27,6 +28,9 @@ export default function Profile() {
                         <ProfileHome />
                     </div>
                 </div>
+                <span className="absolute z-50 top-[30%] ">
+                    <NewUserPopUp />
+                </span>
             </main>
         </div>
     );

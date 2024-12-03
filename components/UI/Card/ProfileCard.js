@@ -40,8 +40,8 @@ function ProfileCard({ id, username, email, coverPicture, name, image, surname =
         }}>
             {coverPicture ?
                 <div className='relative  items-center justify-center flex'>
-                    <Image src={coverPicture} width={800} height={800} className=' hidden lg:inline lg:rounded-3xl rounded-xl' alt='profile' />
-                    <Image src={coverPicture} width={800} height={800} className=' lg:hidden lg:rounded-3xl rounded-xl ' alt='profile' />
+                    <Image src={coverPicture} width={1000} height={800} className=' hidden lg:inline lg:rounded-3xl rounded-xl' alt='profile' />
+                    <Image src={coverPicture} width={1000} height={800} className=' lg:hidden lg:rounded-3xl rounded-xl ' alt='profile' />
                     <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl lg:rounded-3xl '></div>
                 </div>
                 : <div className='relative'>
