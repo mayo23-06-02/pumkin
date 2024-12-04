@@ -67,7 +67,6 @@ function SignUpHome() {
                 router.push('../../login')
             });
         } else {
-            alert("Passwords don't match")
         }
     }
 

@@ -11,18 +11,14 @@ function NewUserPopUp() {
 
     useEffect(() => {
         const userData = JSON.parse( cookies.get('userData'))
-        console.log("ff",userData);
         
         if (!userData.profilePicture || !userData.bio  || userData.hobbies < 0 || userData.passions?.length < 0) {
             setShowUserData(true)
-            alert("Please complete your profile")
         } else {
             setShowUserData(false)
-            alert("Please complete yoyyur profile")
 
         }
 
-        console.log(showUserData);
         
     }, [])
 

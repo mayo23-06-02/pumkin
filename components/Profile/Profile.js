@@ -144,7 +144,7 @@ function ProfileHome() {
     if (user) {
         return (
             <div className=' relative bg-gradient-to-b space-y-6 bg-slate-100 lg:py-16 py-2 px-6 lg:px-16'>
-                <span className={`absolute z-50 px-6 w-full h-full   left-0 lg:left-[25%] top-10  ${showCropper ? "block" : "hidden"}`}>
+                <span className={`absolute z-50 px-6 w-full h-full   left-0 lg:left-[12%] top-10  ${showCropper ? "block" : "hidden"}`}>
                     <div className='relative flex-1 '>
 
                         <div className='absolute'>
